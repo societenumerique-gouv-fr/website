@@ -28,3 +28,16 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.SCW_CONTAINER_REGISTRY }}/website:latest
+
+  run-container:
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    steps:
+      - name: Apply website infrastructure terraform configuration
+        id: run-terraform
+        run: |
+          curl -X POST \
+            -H "X-Auth-Token: ${{ secrets.SCW_SECRET_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            "https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/21056abf-1040-4d04-a63e-52a1c6691ba7/deploy"
