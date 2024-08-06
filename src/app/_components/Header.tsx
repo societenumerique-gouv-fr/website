@@ -36,6 +36,8 @@ type HeaderProps = {
   }[];
 };
 
+const isExternalLink = (target?: string): boolean => target?.includes('https://');
+
 export const Header = ({ alerte, liens_navbar }: HeaderProps) => {
   const [selectedLink, setSelectedLink] = useState(null);
   const [selectedSubLink, setSelectedSubLink] = useState(null);
@@ -188,9 +190,9 @@ export const Header = ({ alerte, liens_navbar }: HeaderProps) => {
                         return (
                           <li key={headerLink.id} className='subspace'>
                             <Link
-                              href={headerLink.page_cible}
+                              href={`${isExternalLink(headerLink.page_cible) ? '' : '/'}${headerLink.page_cible}`}
                               className='headerlink sublink'
-                              target={headerLink.page_cible.includes('https') ? '_blank' : undefined}>
+                              target={isExternalLink(headerLink.page_cible) ? '_blank' : undefined}>
                               {headerLink.pictogramme_remixicon && (
                                 <>
                                   <svg
@@ -235,17 +237,9 @@ export const Header = ({ alerte, liens_navbar }: HeaderProps) => {
                     return lien_navbar.attributes.lien_navbar[0].__component == 'composants.lien' ? (
                       <li className='fr-nav__item' key={lien_navbar.id}>
                         <Link
-                          href={
-                            getNestedPath(lien_navbar.attributes.lien_navbar[0].page_cible) +
-                            lien_navbar.attributes.lien_navbar[0].page_cible
-                          }
+                          href={`${isExternalLink(lien_navbar.attributes.lien_navbar[0].page_cible) ? '' : '/'}${getNestedPath(lien_navbar.attributes.lien_navbar[0].page_cible)}${lien_navbar.attributes.lien_navbar[0].page_cible}`}
                           className='fr-nav__link'
-                          target={
-                            lien_navbar.attributes.lien_navbar[0].page_cible &&
-                            lien_navbar.attributes.lien_navbar[0].page_cible.includes('https://')
-                              ? '_blank'
-                              : undefined
-                          }
+                          target={isExternalLink(lien_navbar.attributes.lien_navbar[0].page_cible) ? '_blank' : undefined}
                           aria-current={selectedLink === lien_navbar ? 'true' : null}
                           onClick={() => {
                             setSelectedLink(lien_navbar), setCurrentCollapse(null);
@@ -271,10 +265,10 @@ export const Header = ({ alerte, liens_navbar }: HeaderProps) => {
                               return (
                                 <li key={data.id}>
                                   <Link
-                                    href={getNestedPath(data.page_cible) + data.page_cible}
+                                    href={`${isExternalLink(data.page_cible) ? '' : '/'}${getNestedPath(data.page_cible)}${data.page_cible}`}
                                     className='fr-nav__link'
                                     aria-current={selectedSubLink === data ? 'true' : null}
-                                    target={data.page_cible && data.page_cible.includes('https://') ? '_blank' : undefined}
+                                    target={isExternalLink(data.page_cible) ? '_blank' : undefined}
                                     onClick={(e) => {
                                       if (e.button == 0) setCurrentCollapse(lien_navbar.id);
                                     }}

@@ -4,12 +4,16 @@ import { ScrollToTop } from './_components/ScrollToTop';
 import { Footer } from './_components/Footer';
 import { Header } from './_components/Header';
 import './globals.scss';
+import { Dsfr } from './Dsfr';
+import { PreloadResources } from './PreloadResources';
 
 export const metadata: Metadata = {
   title: 'Société Numérique',
   description:
     'Le Programme Société Numérique de l’Agence Nationale de la Cohésion des Territoires œuvre en faveur d’un numérique d’intérêt général en offrant à tous et toutes les clés d’appropriation du numérique.'
 };
+
+export const dynamic = 'force-dynamic';
 
 const RootLayout = async ({
   children
@@ -22,6 +26,8 @@ const RootLayout = async ({
   return (
     <html lang='en'>
       <body>
+        <PreloadResources />
+        <Dsfr />
         <ScrollToTop />
         <Header alerte={alertResponse.data} liens_navbar={linksResponse.data} />
         <div className='margin-footer'>{children} </div>
