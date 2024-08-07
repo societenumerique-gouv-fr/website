@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { PageBuilder } from '../(pages)/[...slug]/_components/PageBuilder';
+import { PageBuilder } from '@/app/_components/PageBuilder';
 
 type Page = {
   id: string;

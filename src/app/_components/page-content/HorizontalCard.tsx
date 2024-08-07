@@ -101,7 +101,7 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => {
       {data.type != 'carte-horizontale' && (
         <Card
           start={
-            <Tag className='fr-mb-1w' small linkProps={{ href: '/' }}>
+            <Tag className='fr-mb-1w fr-tag--blue-france' small>
               {type}
             </Tag>
           }
@@ -121,10 +121,10 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => {
             <Card
               start={
                 labels.length > 0 && (
-                  <ul className='fr-badges-group fr-mb-1w'>
+                  <ul className='fr-tags-group fr-mb-1w'>
                     {labels.map((l) => (
                       <li key={l.titre_du_label}>
-                        <Tag small linkProps={{ href: '/' }}>
+                        <Tag className='fr-tag--blue-france' small>
                           {l.titre_du_label}
                         </Tag>
                       </li>
@@ -132,7 +132,11 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => {
                   </ul>
                 )
               }
-              desc={data.texte}
+              desc={
+                <>
+                  <strong>{data.texte_en_valeur}</strong> {data.texte}
+                </>
+              }
               horizontal
               imageAlt=''
               imageComponent={
@@ -150,7 +154,7 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => {
                 href: data.lien,
                 target: data?.lien.includes('https://') ? '_blank' : undefined
               }}
-              title={data.texte_en_valeur}
+              title={data.titre}
             />
           </div>
         </div>

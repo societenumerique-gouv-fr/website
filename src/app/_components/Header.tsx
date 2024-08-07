@@ -36,7 +36,7 @@ type HeaderProps = {
   }[];
 };
 
-const isExternalLink = (target?: string): boolean => target?.includes('https://');
+const isExternalLink = (target?: string): boolean => target?.includes('https://') || target?.includes('mailto:');
 
 export const Header = ({ alerte, liens_navbar }: HeaderProps) => {
   const [selectedLink, setSelectedLink] = useState(null);
@@ -161,7 +161,7 @@ export const Header = ({ alerte, liens_navbar }: HeaderProps) => {
                       className='fr-responsive-img'
                       style={{ maxWidth: '9.0625rem' }}
                       src={process.env.NEXT_PUBLIC_STRAPI_URL + headerImage}
-                      alt='Logo Société Numérique'
+                      alt=''
                     />
                   </div>
                   <div className='fr-header__navbar'>
