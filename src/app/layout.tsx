@@ -26,11 +26,12 @@ const RootLayout = async ({
   return (
     <html lang='en'>
       <body>
+        <div id='skip-links' />
         <PreloadResources />
         <Dsfr />
         <ScrollToTop />
         <Header alerte={alertResponse.data} liens_navbar={linksResponse.data} />
-        <div className='margin-footer'>{children} </div>
+        <div className='margin-footer'>{children}</div>
         <Footer />
       </body>
     </html>

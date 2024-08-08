@@ -1091,3 +1091,7 @@ a {
   background-color: var(--background-contrast-blue-france) !important;
   color: var(--text-action-high-blue-france) !important;
 }
+
+.fr-text--capitalize {
+  text-transform: capitalize !important;
+}

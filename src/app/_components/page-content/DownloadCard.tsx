@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+'use client';
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { labelColors, marginsBottom } from '../structs';
@@ -157,6 +159,7 @@ export const DownloadCard = ({ data, rows }) => {
           )}
           {localData.type_de_carte == 'Classique' && (
             <div
+              className={`fr-col-md-${12 / rows} fr-col`}
               key={localData.id}
               style={
                 rows == 1
@@ -215,7 +218,7 @@ export const DownloadCard = ({ data, rows }) => {
                 {imageUrl && (
                   <div className='fr-card__header fr-col-md-4'>
                     <div className='fr-card__img'>
-                      <img className='fr-responsive-img' src={imageUrl} alt='' />
+                      <img className='fr-p-3w' style={{ width: '100%', objectFit: 'contain' }} src={imageUrl} alt='' />
                     </div>
                   </div>
                 )}

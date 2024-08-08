@@ -1,19 +1,9 @@
-import { PageResource } from '@/ressources/pageResource';
-import { PageBuilder } from '@/app/_components/PageBuilder';
 import type { Metadata } from 'next';
-
-const getPagesMatchingSlug = async (slug: string[]): Promise<{ data: [PageResource] | [] }> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/pages?filters[nom_de_page][$eq]=${slug.join('/')}`);
-
-  if (!response.ok) {
-    throw new Error('Impossible de récupérer les articles');
-  }
-
-  return response.json();
-};
-
-const toSinglePage = ({ data: pages }: { data: [PageResource] | [] }): PageResource['attributes'] | undefined =>
-  pages[0]?.attributes;
+import { PageBuilder } from '@/app/_components/PageBuilder';
+import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
+import NotFound from '@/app/not-found';
+import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
+import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
 export const generateMetadata = async ({ params: { slug } }: { params: { slug: string[] } }): Promise<Metadata> => {
   const page = toSinglePage(await getPagesMatchingSlug(slug));
@@ -26,9 +16,16 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
 const Page = async ({ params: { slug } }: { params: { slug: string[] } }) => {
   const page = toSinglePage(await getPagesMatchingSlug(slug));
 
-  if (page == null) return <>Not found</>;
+  if (page == null) return <NotFound />;
 
-  return <PageBuilder data={page.Composants} dataArticles={[]} isHome={false} />;
+  return (
+    <>
+      <SkipLinksPortal links={defaultSkipLinks} />
+      <main id={contentId}>
+        <PageBuilder data={page.Composants} dataArticles={[]} isHome={false} />
+      </main>
+    </>
+  );
 };
 
 export default Page;

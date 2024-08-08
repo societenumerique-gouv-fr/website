@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+'use client';
+
 import { useEffect, useState } from 'react';
 import { VerticalCard } from './VerticalCard';
 import { HorizontalCard } from './HorizontalCard';

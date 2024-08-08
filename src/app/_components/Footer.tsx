@@ -143,7 +143,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <footer className='fr-footer' role='contentinfo' id='footer'>
+      <footer className='fr-footer' role='contentinfo' id='fr-footer'>
         <div className='fr-container'>
           <div className='fr-footer__body'>
             <div className='fr-footer__brand fr-enlarge-link'>

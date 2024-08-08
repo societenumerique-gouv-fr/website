@@ -1,11 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export const BreadCrumb = ({ hasBannerTitle }) => {
+export const BreadCrumb = () => {
   const pathname = usePathname();
   const [pathnameArray, setPathnameArrayArray] = useState<string[]>([]);
 
@@ -14,6 +16,8 @@ export const BreadCrumb = ({ hasBannerTitle }) => {
   }, [pathname]);
 
   const getFormatedText = (name: string) => {
+    console.log(name);
+
     switch (name) {
       case 'Actualites':
         return 'Actualités';
@@ -26,7 +30,7 @@ export const BreadCrumb = ({ hasBannerTitle }) => {
       case 'Notre media':
         return 'Notre média';
       default:
-        return name;
+        return decodeURI(name);
     }
   };
 
@@ -36,34 +40,10 @@ export const BreadCrumb = ({ hasBannerTitle }) => {
   const isBreves = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'breves';
   const isEtudes = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'etudes';
 
-  const getNestedPath = (pathnameArray: string[]) => {
-    if (pathnameArray.includes('axe') || pathname.includes('engagement-transverse')) {
-      return 'nos-missions/';
-    }
-
-    switch (pathname) {
-      case 'rapports-strategiques':
-        return 'nos-ressources/';
-      case 'etudes':
-        return 'nos-ressources/';
-      case 'notre-media':
-        return 'nos-ressources/';
-      case 'notre-revue':
-        return 'nos-ressources';
-      case 'breves':
-        return 'actualites/';
-      default:
-        return '';
-    }
-  };
-
   return (
     <>
       {pathnameArray && pathnameArray.length > 0 && pathnameArray[0] != 'accueil' && (
-        <nav
-          role='navigation'
-          className={`fr-breadcrumb ${hasBannerTitle ? 'decal-breadcumb' : ''}`}
-          aria-label='vous êtes ici :'>
+        <nav role='navigation' className='fr-breadcrumb' aria-label='vous êtes ici :'>
           <button className='fr-breadcrumb__button' aria-expanded='false' aria-controls='breadcrumb-1'>
             Voir le fil d’Ariane
           </button>
@@ -97,7 +77,10 @@ export const BreadCrumb = ({ hasBannerTitle }) => {
                   <>
                     {index < pathnameArray.length - 1 && (
                       <li>
-                        <Link key={path.id} className='fr-breadcrumb__link' href={`/${getNestedPath(path)}${path}`}>
+                        <Link
+                          key={path.id}
+                          className='fr-breadcrumb__link'
+                          href={`/${pathnameArray.slice(0, index + 1).join('/')}`}>
                           {getFormatedText(currName)}
                         </Link>
                       </li>
