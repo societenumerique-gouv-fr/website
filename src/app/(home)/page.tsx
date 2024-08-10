@@ -10,6 +10,7 @@ import { getRapportsDeRecherches } from '@/api/rapports-de-recherches';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: 'Accueil - Société Numérique',
