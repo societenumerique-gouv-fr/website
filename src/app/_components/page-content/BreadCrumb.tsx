@@ -16,8 +16,6 @@ export const BreadCrumb = () => {
   }, [pathname]);
 
   const getFormatedText = (name: string) => {
-    console.log(name);
-
     switch (name) {
       case 'Actualites':
         return 'Actualités';

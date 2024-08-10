@@ -1,11 +1,14 @@
+import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { fetchData } from '@/functions/fetcher';
+import { NavbarNavigationItems, toNavigation } from '@/presenters/navbar/navigation-item';
+import { NavbarHeader, toQuickAccessItems } from '@/presenters/navbar/header';
 import { ScrollToTop } from './_components/ScrollToTop';
 import { Footer } from './_components/Footer';
 import { Header } from './_components/Header';
-import './globals.scss';
 import { Dsfr } from './Dsfr';
 import { PreloadResources } from './PreloadResources';
+import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'Société Numérique',
@@ -18,10 +21,13 @@ export const dynamic = 'force-dynamic';
 const RootLayout = async ({
   children
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) => {
-  const linksResponse = await fetchData(process.env.NEXT_PUBLIC_STRAPI_URL + '/api/navigations');
-  const alertResponse = await fetchData(process.env.NEXT_PUBLIC_STRAPI_URL + '/api/alerte');
+  const header: { data: NavbarHeader } = await fetchData(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/header`);
+  const navigationItems: { data: NavbarNavigationItems } = await fetchData(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/header-navigation`
+  );
+  const alertResponse = await fetchData(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/alerte`);
 
   return (
     <html lang='en'>
@@ -30,7 +36,12 @@ const RootLayout = async ({
         <PreloadResources />
         <Dsfr />
         <ScrollToTop />
-        <Header alerte={alertResponse.data} liens_navbar={linksResponse.data} />
+        <Header
+          alerte={alertResponse.data}
+          headerImageUrl={header.data.attributes.logo.data.attributes.url}
+          quickAccessItems={header.data.attributes.liens_header.map(toQuickAccessItems)}
+          navigation={toNavigation(navigationItems.data)}
+        />
         <div className='margin-footer'>{children}</div>
         <Footer />
       </body>
