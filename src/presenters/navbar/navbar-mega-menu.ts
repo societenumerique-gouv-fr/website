@@ -17,26 +17,30 @@ export type NavbarMegaMenu = {
 export const isNavbarMegaMenu = (navigationItem: NavbarNavigationItem): navigationItem is NavbarMegaMenu =>
   navigationItem.__component === 'composants.mega-menu-navbar';
 
-const toLinks = (lien: Lien) => ({
+const toLinks = (pathname: string) => (lien: Lien) => ({
   linkProps: { href: lien.page_cible },
   text: lien.titre_du_lien,
-  target: isExternalLink(lien.page_cible) ? '_blank' : '_self'
+  target: isExternalLink(lien.page_cible) ? '_blank' : '_self',
+  isActive: pathname.endsWith(lien.page_cible)
 });
 
-const toCategories = (navigationItem: NavbarMegaMenu) => (categorie: Categorie) => ({
+const toCategories = (navigationItem: NavbarMegaMenu, pathname: string) => (categorie: Categorie) => ({
   categoryMainLink: {
     text: categorie.titre_de_la_categorie,
     linkProps: {
       href: categorie.page_cible ?? '#',
       target: isExternalLink(categorie.page_cible) ? '_blank' : '_self'
-    }
+    },
+    isActive: pathname.endsWith(categorie.page_cible ?? '#')
   },
-  links: navigationItem.liens.filter((lien) => lien.titre_de_la_categorie === categorie.titre_de_la_categorie).map(toLinks)
+  links: navigationItem.liens
+    .filter((lien) => lien.titre_de_la_categorie === categorie.titre_de_la_categorie)
+    .map(toLinks(pathname))
 });
 
-export const toNavbarMegaMenu = (navigationItem: NavbarMegaMenu) => ({
+export const toNavbarMegaMenu = (pathname: string) => (navigationItem: NavbarMegaMenu) => ({
   megaMenu: {
-    categories: navigationItem.categories.map(toCategories(navigationItem)),
+    categories: navigationItem.categories.map(toCategories(navigationItem, pathname)),
     leader: {
       paragraph: navigationItem.texte_de_presentation,
       title: navigationItem.titre_editorialise

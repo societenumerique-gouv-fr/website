@@ -10,10 +10,12 @@ export type NavbarMenuDeroulant = {
 export const isNavbarMenuDeroulant = (navigationItem: NavbarNavigationItem): navigationItem is NavbarMenuDeroulant =>
   navigationItem.__component === 'composants.deroulant-navbar';
 
-export const toNavbarMenuDeroulant = (navigationItem: NavbarMenuDeroulant) => ({
+export const toNavbarMenuDeroulant = (pathname: string) => (navigationItem: NavbarMenuDeroulant) => ({
   menuLinks: navigationItem.liens.map((lien: NavbarLink) => ({
     linkProps: { href: lien.page_cible, target: isExternalLink(lien.page_cible) ? '_blank' : '_self' },
-    text: lien.titre_du_lien
+    text: lien.titre_du_lien,
+    isActive: pathname.endsWith(lien.page_cible)
   })),
-  text: navigationItem.titre_du_menu
+  text: navigationItem.titre_du_menu,
+  isActive: navigationItem.liens.some((lien: NavbarLink) => pathname.endsWith(lien.page_cible))
 });

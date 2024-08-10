@@ -22,7 +22,7 @@ export const VerticalCard = ({ data, rows }) => (
               </h3>
             </div>
           </div>
-          {data.attributes.image.data.attributes.url && (
+          {data.attributes.image.data?.attributes.url && (
             <div className='fr-card__header'>
               <img
                 className='fr-responsive-img'

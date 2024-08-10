@@ -25,7 +25,7 @@ export const Banner = () => {
       const resp = await fetchData(process.env.NEXT_PUBLIC_STRAPI_URL + '/api/banniere');
       setTitle(resp.data.attributes.titre);
       setTitleSize(resp.data.attributes.taille_du_titre);
-      setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + resp.data.attributes.image.data.attributes.url);
+      setImageUrl(resp.data.attributes.image.data.attributes.url);
       setTitleColor(resp.data.attributes.couleur_du_titre);
     } catch (e) {
       console.log('Erreur', e);

@@ -1,11 +1,13 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { Header } from '@codegouvfr/react-dsfr/Header/Header';
+import Notice from '@codegouvfr/react-dsfr/Notice';
 import { fetchData } from '@/functions/fetcher';
 import { NavbarNavigationItems, toNavigation } from '@/presenters/navbar/navigation-item';
 import { NavbarHeader, toQuickAccessItems } from '@/presenters/navbar/header';
+import { ActiveHeader } from './_components/ActiveHeader';
 import { ScrollToTop } from './_components/ScrollToTop';
 import { Footer } from './_components/Footer';
-import { Header } from './_components/Header';
 import { Dsfr } from './Dsfr';
 import { PreloadResources } from './PreloadResources';
 import './globals.scss';
@@ -37,12 +39,8 @@ const RootLayout = async ({
         <PreloadResources />
         <Dsfr />
         <ScrollToTop />
-        <Header
-          alerte={alertResponse.data}
-          headerImageUrl={header.data.attributes.logo.data.attributes.url}
-          quickAccessItems={header.data.attributes.liens_header.map(toQuickAccessItems)}
-          navigation={toNavigation(navigationItems.data)}
-        />
+        <ActiveHeader header={header} navigationItems={navigationItems} />
+        {alertResponse.data.attributes.message && <Notice title={alertResponse.data.attributes.message} isClosable />}
         <div className='margin-footer'>{children}</div>
         <Footer />
       </body>

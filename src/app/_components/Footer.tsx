@@ -3,6 +3,7 @@
 
 'use client';
 
+import { Footer as FooterDsfr } from '@codegouvfr/react-dsfr/Footer';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { fetchData } from '@/functions/fetcher';
@@ -30,7 +31,7 @@ export const Footer = () => {
     if (content) {
       content.afficher_section ? setColMd('fr-col-md-4 footer-padding') : setColMd('fr-col-md-8');
       if (content.liens_footer) setFooterLinks(content.liens_footer[0].liens_footer);
-      if (content.logo) setLogoUrl(content.logo.data.attributes.url);
+      if (content.logo) setLogoUrl(content.logo.data?.attributes.url);
     }
   }, [content]);
 
@@ -143,72 +144,32 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <footer className='fr-footer' role='contentinfo' id='fr-footer'>
-        <div className='fr-container'>
-          <div className='fr-footer__body'>
-            <div className='fr-footer__brand fr-enlarge-link'>
-              <a href='/' title='Accueil - ANCT' style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={process.env.NEXT_PUBLIC_STRAPI_URL + '/uploads/rp_6c5a005a88.svg'} style={{ width: '7rem' }} />
-                {logoUrl && (
-                  <img src={process.env.NEXT_PUBLIC_STRAPI_URL + logoUrl} style={{ width: '9rem', marginLeft: '32px' }} />
-                )}
-              </a>
-            </div>
-            <div className='fr-footer__content'>
-              <p className='fr-footer__content-desc'>{content.paragraphe_de_droite}</p>
-              <ul className='fr-footer__content-list'>
-                <li className='fr-footer__content-item'>
-                  <a className='fr-footer__content-link' target='_blank' href='https://legifrance.gouv.fr' rel='noreferrer'>
-                    legifrance.gouv.fr
-                  </a>
-                </li>
-                <li className='fr-footer__content-item'>
-                  <a className='fr-footer__content-link' target='_blank' href='https://gouvernement.fr' rel='noreferrer'>
-                    gouvernement.fr
-                  </a>
-                </li>
-                <li className='fr-footer__content-item'>
-                  <a className='fr-footer__content-link' target='_blank' href='https://service-public.fr' rel='noreferrer'>
-                    service-public.fr
-                  </a>
-                </li>
-                <li className='fr-footer__content-item'>
-                  <a className='fr-footer__content-link' target='_blank' href='https://data.gouv.fr' rel='noreferrer'>
-                    data.gouv.fr
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className='fr-footer__bottom'>
-            <ul className='fr-footer__bottom-list'>
-              {footerLinks &&
-                footerLinks.map((link) => {
-                  return (
-                    <li key={link.url} className='fr-footer__bottom-item'>
-                      <Link
-                        className='fr-footer__bottom-link'
-                        href={link.url}
-                        target={link.url.includes('https') ? '__blank' : undefined}>
-                        {link.titre_du_lien}
-                      </Link>
-                    </li>
-                  );
-                })}
-            </ul>
-            <div className='fr-footer__bottom-copy'>
-              <p>
-                Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont proposés
-                sous{' '}
-                <a href='https://github.com/etalab/licence-ouverte/blob/master/LO.md' target='_blank' rel='noreferrer'>
-                  licence etalab-2.0
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <FooterDsfr
+        brandTop={
+          <>
+            République
+            <br />
+            Française
+          </>
+        }
+        homeLinkProps={{ href: '/', title: 'Accueil - Société Numérique' }}
+        accessibility='non compliant'
+        contentDescription='Le Programme Société Numérique de l’Agence Nationale de la Cohésion des Territoires œuvre en faveur d’un numérique d’intérêt général en offrant à tous et toutes les clés d’appropriation du numérique.'
+        operatorLogo={{
+          alt: 'Programme Société Numérique',
+          imgUrl: logoUrl,
+          orientation: 'horizontal'
+        }}
+        bottomItems={footerLinks?.map((link) => (
+          <Link
+            key={link.url}
+            className='fr-footer__bottom-link'
+            href={link.url}
+            target={link.url.includes('https') ? '__blank' : undefined}>
+            {link.titre_du_lien}
+          </Link>
+        ))}
+      />
     </>
   );
 };

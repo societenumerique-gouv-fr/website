@@ -46,7 +46,7 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
                 <img
                   className='fr-p-3w'
                   style={{ width: '100%', objectFit: 'contain' }}
-                  src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.data.attributes.url}`}
+                  src={data.image.data.attributes.url}
                   alt=''
                 />
               ) : undefined

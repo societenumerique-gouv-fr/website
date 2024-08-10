@@ -11,20 +11,22 @@ export type NavbarNavigationItems = {
   };
 };
 
-const toHeaderNavigationItem = (navigationItem: NavbarNavigationItem): MainNavigationProps.Item | undefined => {
-  if (isNavbarLink(navigationItem)) {
-    return toNavbarLink(navigationItem);
-  }
-  if (isNavbarMenuDeroulant(navigationItem)) {
-    return toNavbarMenuDeroulant(navigationItem);
-  }
-  if (isNavbarMegaMenu(navigationItem)) {
-    return toNavbarMegaMenu(navigationItem);
-  }
-};
+const toHeaderNavigationItem =
+  (pathname: string) =>
+  (navigationItem: NavbarNavigationItem): MainNavigationProps.Item | undefined => {
+    if (isNavbarLink(navigationItem)) {
+      return toNavbarLink(pathname)(navigationItem);
+    }
+    if (isNavbarMenuDeroulant(navigationItem)) {
+      return toNavbarMenuDeroulant(pathname)(navigationItem);
+    }
+    if (isNavbarMegaMenu(navigationItem)) {
+      return toNavbarMegaMenu(pathname)(navigationItem);
+    }
+  };
 
 const onlyDefinedNavigationItems = (navigationItem?: MainNavigationProps.Item): navigationItem is MainNavigationProps.Item =>
   navigationItem != null;
 
-export const toNavigation = (navigationItems: NavbarNavigationItems) =>
-  navigationItems.attributes.Navbar_navigation_items.map(toHeaderNavigationItem).filter(onlyDefinedNavigationItems);
+export const toNavigation = (pathname: string) => (navigationItems: NavbarNavigationItems) =>
+  navigationItems.attributes.Navbar_navigation_items.map(toHeaderNavigationItem(pathname)).filter(onlyDefinedNavigationItems);

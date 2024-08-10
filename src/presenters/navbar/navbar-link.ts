@@ -12,10 +12,11 @@ export const isExternalLink = (target?: string): boolean =>
 export const isNavbarLink = (navigationItem: NavbarNavigationItem): navigationItem is NavbarLink =>
   navigationItem.__component === 'composants.lien';
 
-export const toNavbarLink = (navigationItem: NavbarLink) => ({
+export const toNavbarLink = (pathname: string) => (navigationItem: NavbarLink) => ({
   linkProps: {
     href: navigationItem.page_cible,
     target: isExternalLink(navigationItem.page_cible) ? '_blank' : '_self'
   },
-  text: navigationItem.titre_du_lien
+  text: navigationItem.titre_du_lien,
+  isActive: pathname.endsWith(navigationItem.page_cible) || (pathname != '/' && navigationItem.page_cible.startsWith(pathname))
 });

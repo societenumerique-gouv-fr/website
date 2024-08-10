@@ -10,7 +10,7 @@ export type LienHeader = {
 export type NavbarHeader = {
   attributes: {
     liens_header: LienHeader[];
-    logo: { data: { attributes: { url: string } } };
+    logo: { data?: { attributes: { url: string } } };
   };
 };
 
