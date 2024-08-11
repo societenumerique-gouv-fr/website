@@ -41,4 +41,4 @@ jobs:
             -H "X-Auth-Token: ${{ secrets.SCW_SECRET_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{}' \
-            "https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/21056abf-1040-4d04-a63e-52a1c6691ba7/deploy"
+            "https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/${{ secrets.SCW_CONTAINER_ID }}/deploy"
