@@ -27,24 +27,32 @@ const toLinks = (pathname: string) => (lien: Lien) => ({
 const toCategories = (navigationItem: NavbarMegaMenu, pathname: string) => (categorie: Categorie) => ({
   categoryMainLink: {
     text: categorie.titre_de_la_categorie,
-    linkProps: {
-      href: categorie.page_cible ?? '#',
-      target: isExternalLink(categorie.page_cible) ? '_blank' : '_self'
-    },
-    isActive: pathname.endsWith(categorie.page_cible ?? '#')
+    linkProps: categorie.page_cible
+      ? {
+          href: categorie.page_cible,
+          target: isExternalLink(categorie.page_cible) ? '_blank' : '_self'
+        }
+      : {}
   },
   links: navigationItem.liens
     .filter((lien) => lien.titre_de_la_categorie === categorie.titre_de_la_categorie)
     .map(toLinks(pathname))
 });
 
-export const toNavbarMegaMenu = (pathname: string) => (navigationItem: NavbarMegaMenu) => ({
-  megaMenu: {
-    categories: navigationItem.categories.map(toCategories(navigationItem, pathname)),
-    leader: {
-      paragraph: navigationItem.texte_de_presentation,
-      title: navigationItem.titre_editorialise
-    }
-  },
-  text: navigationItem.titre_du_menu
-});
+const toActiveLink = ({ links }: { links: { isActive: boolean }[] }) => links.map((link) => link.isActive);
+
+export const toNavbarMegaMenu = (pathname: string) => (navigationItem: NavbarMegaMenu) => {
+  const categories = navigationItem.categories.map(toCategories(navigationItem, pathname));
+
+  return {
+    megaMenu: {
+      categories,
+      leader: {
+        paragraph: navigationItem.texte_de_presentation,
+        title: navigationItem.titre_editorialise
+      }
+    },
+    text: navigationItem.titre_du_menu,
+    isActive: categories.flatMap(toActiveLink).some((isActive: boolean) => isActive)
+  };
+};

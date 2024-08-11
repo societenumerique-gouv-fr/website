@@ -17,5 +17,10 @@ export const toNavbarMenuDeroulant = (pathname: string) => (navigationItem: Navb
     isActive: pathname.endsWith(lien.page_cible)
   })),
   text: navigationItem.titre_du_menu,
-  isActive: navigationItem.liens.some((lien: NavbarLink) => pathname.endsWith(lien.page_cible))
+  isActive: navigationItem.liens.some(
+    (lien: NavbarLink) =>
+      pathname.endsWith(lien.page_cible) ||
+      (lien.page_cible != '/' && pathname.startsWith(lien.page_cible)) ||
+      (pathname != '/' && lien.page_cible.startsWith(pathname))
+  )
 });

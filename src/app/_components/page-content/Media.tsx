@@ -15,8 +15,8 @@ export const Media = ({ data }) => {
   useEffect(() => {
     if (data.image.data == null && data.lien_video == null) {
       setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + '/uploads/placeholder_16x9_e6d60ccc52.png');
-    } else if (data.image != null && data.image.data != null) {
-      setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + data.image.data.attributes.url);
+    } else if (data.image.data != null) {
+      setImageUrl(data.image.data.attributes.url);
     }
     if (data.lien_video != null) {
       setVideoUrl(data.lien_video.replace('watch?v=', 'embed/'));

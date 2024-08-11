@@ -18,5 +18,8 @@ export const toNavbarLink = (pathname: string) => (navigationItem: NavbarLink) =
     target: isExternalLink(navigationItem.page_cible) ? '_blank' : '_self'
   },
   text: navigationItem.titre_du_lien,
-  isActive: pathname.endsWith(navigationItem.page_cible) || (pathname != '/' && navigationItem.page_cible.startsWith(pathname))
+  isActive:
+    pathname.endsWith(navigationItem.page_cible) ||
+    (navigationItem.page_cible != '/' && pathname.startsWith(navigationItem.page_cible)) ||
+    (pathname != '/' && navigationItem.page_cible.startsWith(pathname))
 });

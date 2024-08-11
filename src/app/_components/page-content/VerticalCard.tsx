@@ -23,14 +23,8 @@ export const VerticalCard = ({ data, rows }) => (
             </div>
           </div>
           {data.attributes.image.data?.attributes.url && (
-            <div className='fr-card__header'>
-              <img
-                className='fr-responsive-img'
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.attributes.image.data.attributes.url}`}
-                alt=''
-                loading='lazy'
-                style={{ minHeight: '200px' }}
-              />
+            <div className='fr-card__header' style={{ height: '200px', overflow: 'hidden' }}>
+              <img className='fr-responsive-img' src={data.attributes.image.data.attributes.url} alt='' loading='lazy' />
             </div>
           )}
         </div>
@@ -81,13 +75,13 @@ export const VerticalCard = ({ data, rows }) => (
             </div>
           </div>
           {data.attributes.image.data.attributes.url && (
-            <div className='fr-card__header'>
+            <div className='fr-card__header' style={{ height: '200px', overflow: 'hidden' }}>
               <img
                 className='fr-responsive-img'
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.attributes.image.data.attributes.url}`}
+                src={data.attributes.image.data.attributes.url}
                 alt=''
                 loading='lazy'
-                style={{ minHeight: '200px', width: width && rows == 1 ? width : '' }}
+                style={{ width: width && rows == 1 ? width : '' }}
               />
             </div>
           )}
