@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -13,9 +10,26 @@ const sizes = {
   Grand: 'fr-btn--lg'
 };
 
-export const Button = ({ data, rows }) => {
-  const [buttonData, setButtonData] = useState([]);
-  const [fillIcon, setFillIcon] = useState('');
+type ButtonData = {
+  id: string;
+  couleur: string;
+  espacement_bas: string;
+  page_cible: string;
+  sans_contour: boolean;
+  taille: string;
+  position: string;
+  texte: string;
+  afficher_icone: boolean;
+  position_icone: string;
+};
+
+type ButtonProps = {
+  data: ButtonData;
+  rows: number;
+};
+export const Button = ({ data, rows }: ButtonProps) => {
+  const [buttonData, setButtonData] = useState<ButtonData>(data);
+  const [fillIcon, setFillIcon] = useState<string>('');
 
   useEffect(() => {
     setButtonData(data);

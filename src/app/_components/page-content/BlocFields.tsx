@@ -4,7 +4,24 @@
 import Link from 'next/link';
 import { marginsBottom } from '../structs';
 
-export const BlocFields = ({ data }) => {
+type BlocFieldSimple = {
+  id: string;
+  page_cible: string;
+  texte_en_valeur: string;
+  texte: string;
+};
+
+type DataProps = {
+  espacement_bas: string;
+  titre: string;
+  Bloc_simple: BlocFieldSimple[];
+};
+
+type BlocFieldsProps = {
+  data: DataProps;
+};
+
+export const BlocFields = ({ data }: BlocFieldsProps) => {
   return (
     <div className='flexrow-container'>
       <div className='champ-de-blocs' style={{ marginBottom: marginsBottom[data.espacement_bas] }}>

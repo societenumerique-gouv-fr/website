@@ -1,23 +1,50 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
-import { useEffect, useState } from 'react';
+import { marginsBottom } from '../structs';
+import { ReactNode, useEffect, useState } from 'react';
 import { VerticalCard } from './VerticalCard';
 import { HorizontalCard } from './HorizontalCard';
 
-export const BlocCards = ({ articles, type }) => {
-  const [subArticles, setSubArticles] = useState([]);
-  const [cursor, setCursor] = useState(1);
-  const [pagination, setPagination] = useState(null);
-  const [articleType, setArticleType] = useState(null);
+type BlocCardArticle = {
+  id: number;
+  image?: {
+    data?: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+  type: string;
+  titre_de_la_carte: string;
+  taille: 'Petit' | 'Moyen' | 'Grand';
+  texte_en_valeur?: string;
+  texte?: string;
+  label?: string;
+  labels: Array<{
+    titre_du_label: string;
+  }>;
+  espacement_bas: keyof typeof marginsBottom;
+  position?: string;
+  lien: string;
+  titre_du_lien: string;
+};
+
+type BlocCardsProps = {
+  articles: BlocCardArticle[];
+  type: 'breve' | 'rapport-strategique' | 'etude' | null;
+};
+
+export const BlocCards = ({ articles, type }: BlocCardsProps) => {
+  const [subArticles, setSubArticles] = useState<BlocCardArticle[][]>([]);
+  const [cursor, setCursor] = useState<number>(1);
+  const [pagination, setPagination] = useState<ReactNode | null>(null);
+  const [articleType, setArticleType] = useState<BlocCardsProps['type']>(null);
 
   const offset = 7;
 
   const subDivideArticles = () => {
-    const all = [];
-    let sub = [];
+    const all: BlocCardArticle[][] = [];
+    let sub: BlocCardArticle[] = [];
     const multiple = type == 'breve' ? 9 : 4;
 
     articles.map((art, index) => {
@@ -32,7 +59,7 @@ export const BlocCards = ({ articles, type }) => {
   };
 
   const updatePagination = () => {
-    const tmpPagination = [];
+    const tmpPagination: ReactNode[] = [];
 
     tmpPagination.push(
       <>
@@ -44,7 +71,7 @@ export const BlocCards = ({ articles, type }) => {
         <li>
           <button
             className='fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label'
-            disabled={cursor == 1 ? 'true' : null}
+            disabled={cursor === 1 ? true : undefined}
             onClick={() => {
               setCursor(cursor > 1 ? cursor - 1 : cursor);
             }}>
@@ -61,7 +88,7 @@ export const BlocCards = ({ articles, type }) => {
             <a
               className='fr-pagination__link'
               href='#'
-              aria-current={cursor === i ? 'true' : null}
+              aria-current={cursor === i ? true : undefined}
               onClick={() => setCursor(i)}>
               {i}
             </a>
@@ -76,7 +103,7 @@ export const BlocCards = ({ articles, type }) => {
               <a
                 className='fr-pagination__link'
                 href='#'
-                aria-current={cursor === i ? 'true' : null}
+                aria-current={cursor === i ? true : undefined}
                 onClick={() => setCursor(i)}>
                 {i}
               </a>
@@ -87,7 +114,7 @@ export const BlocCards = ({ articles, type }) => {
 
       if (cursor >= offset && cursor < subArticles.length - 1) {
         tmpPagination.push(
-          <button className='fr-pagination__link fr-displayed-lg' disabled='true' style={{ cursor: 'default' }}>
+          <button className='fr-pagination__link fr-displayed-lg' disabled={true} style={{ cursor: 'default' }}>
             …
           </button>
         );
@@ -98,7 +125,7 @@ export const BlocCards = ({ articles, type }) => {
               <a
                 className='fr-pagination__link'
                 href='#'
-                aria-current={cursor === i ? 'true' : null}
+                aria-current={cursor === i ? true : undefined}
                 onClick={() => setCursor(i)}>
                 {i}
               </a>
@@ -107,7 +134,7 @@ export const BlocCards = ({ articles, type }) => {
         }
 
         tmpPagination.push(
-          <button className='fr-pagination__link fr-displayed-lg' disabled='true' style={{ cursor: 'default' }}>
+          <button className='fr-pagination__link fr-displayed-lg' disabled={true} style={{ cursor: 'default' }}>
             …
           </button>
         );
@@ -115,7 +142,7 @@ export const BlocCards = ({ articles, type }) => {
 
       if (subArticles.length - cursor < 2) {
         tmpPagination.push(
-          <button className='fr-pagination__link fr-displayed-lg' disabled='true' style={{ cursor: 'default' }}>
+          <button className='fr-pagination__link fr-displayed-lg' disabled={true} style={{ cursor: 'default' }}>
             …
           </button>
         );
@@ -128,9 +155,8 @@ export const BlocCards = ({ articles, type }) => {
               <a
                 className='fr-pagination__link fr-displayed-lg'
                 href='#'
-                disabled='false'
                 onClick={() => setCursor(i)}
-                aria-current={cursor === i ? 'true' : null}>
+                aria-current={cursor === i ? true : undefined}>
                 {i}
               </a>
             </li>
@@ -144,7 +170,7 @@ export const BlocCards = ({ articles, type }) => {
         <li>
           <button
             className='fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label'
-            disabled={cursor == subArticles.length ? 'true' : null}
+            disabled={cursor === subArticles.length ? true : undefined}
             onClick={() => {
               setCursor(cursor < subArticles.length ? cursor + 1 : cursor);
             }}>
@@ -185,7 +211,9 @@ export const BlocCards = ({ articles, type }) => {
           {/* breves */}
           {articleType == 'breve' &&
             subArticles[cursor - 1] &&
-            subArticles[cursor - 1].map((article) => <VerticalCard key={article.titre_de_la_carte} data={article} />)}
+            subArticles[cursor - 1].map((article) => (
+              <VerticalCard key={article.titre_de_la_carte} data={article} rows={undefined} />
+            ))}
         </div>
       </div>
 
