@@ -32,27 +32,13 @@ export const BlocFields = ({ data }: BlocFieldsProps) => {
               <div key={b.id} className='bloc-simple'>
                 {b.page_cible ? (
                   <Link href={b.page_cible} target={b.page_cible && b.page_cible.includes('https://') ? '_blank' : undefined}>
-                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' className='tiny-right-arrow'>
-                      <path
-                        d='M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z'
-                        fill='rgba(0,0,145,1)'></path>
-                    </svg>
-                    <p>
-                      <span className='blue-text'>{b.texte_en_valeur} </span>
-                      {b.texte}
-                    </p>
+                    <span className='blue-text'>{b.texte_en_valeur} </span>
+                    {b.texte}
                   </Link>
                 ) : (
                   <>
-                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' className='tiny-right-arrow'>
-                      <path
-                        d='M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z'
-                        fill='rgba(0,0,145,1)'></path>
-                    </svg>
-                    <p>
-                      <span className='blue-text'>{b.texte_en_valeur} </span>
-                      {b.texte}
-                    </p>
+                    <span className='blue-text'>{b.texte_en_valeur} </span>
+                    {b.texte}
                   </>
                 )}
               </div>
