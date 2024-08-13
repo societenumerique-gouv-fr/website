@@ -1,11 +1,20 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useEffect, useState } from 'react';
 
-export const AnchorNavigator = ({ data }) => {
+type Ancre = {
+  ancre: string;
+  titre: string;
+};
+
+type NavigationData = {
+  ancre: Ancre[];
+};
+type AnchorNavigatorProps = {
+  data: NavigationData;
+};
+
+export const AnchorNavigator = ({ data }: AnchorNavigatorProps) => {
   const [navClass, setNavClass] = useState('fixed-navigation');
 
   useEffect(() => {
