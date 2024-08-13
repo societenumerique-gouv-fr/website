@@ -6,7 +6,7 @@ import Tag from '@codegouvfr/react-dsfr/Tag';
 import React from 'react';
 
 const marginsBottom = {
-  défaut: 'fr-mb-1w',
+  defaut: 'fr-mb-1w',
   px8: 'fr-mb-3v',
   px16: 'fr-mb-3w',
   px32: 'fr-mb-6w',

@@ -1,34 +1,75 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+'use client';
 
+import React from 'react';
 import { labelColors, marginsBottom } from '../structs';
 
-export const DownloadCard = ({ data, rows }) =>
-  data && (
+type DownloadCardLocalData = {
+  id: string;
+  image_de_la_carte: {
+    data: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+  type_de_carte: 'Tuile' | 'Classique';
+  taille: 'Petit' | 'Grand';
+  media_a_telecharger: {
+    data: {
+      attributes: {
+        url: string;
+      };
+    };
+  };
+  titre_de_la_carte: string;
+  description_de_la_carte: string;
+  label?: {
+    couleur_du_label: string;
+    titre_du_label: string;
+  };
+  espacement_bas: string;
+  position: 'Centre' | 'Gauche' | 'Droite';
+  telechargement_externe?: string;
+};
+
+type DownloadCardProps = {
+  data: DownloadCardLocalData;
+  rows: number;
+};
+
+export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
+  if (!data) {
+    return null;
+  }
+
+  const marginBottomValue = marginsBottom[data.espacement_bas as keyof typeof marginsBottom] || 'default';
+  const colorClass = labelColors[data.label?.couleur_du_label as keyof typeof labelColors] || 'defaultColorClass';
+
+  return (
     <>
-      {data.type_de_carte == 'Tuile' && (
+      {data.type_de_carte === 'Tuile' && (
         <div
           key={data.id}
           style={
-            rows == 1
+            rows === 1
               ? {
                   display: 'flex',
-                  justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? '' : 'flex-end'
+                  justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? 'flex-start' : 'flex-end'
                 }
               : {}
           }>
           <div
-            className={`fr-tile fr-tile--download fr-enlarge-link mb2`}
+            className='fr-tile fr-tile--download fr-enlarge-link mb2'
             id='tile-6735'
-            style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
+            style={{ marginBottom: marginBottomValue }}>
             <div className='fr-tile__body'>
               <div className='fr-tile__content'>
                 <h3 className='fr-tile__title'>
                   <a
                     href={
-                      data.media_a_telecharger.data !== null
+                      data.media_a_telecharger.data
                         ? data.media_a_telecharger.data.attributes.url
-                        : data.telechargement_externe
+                        : data.telechargement_externe || '#'
                     }
                     download
                     target='_blank'
@@ -40,7 +81,7 @@ export const DownloadCard = ({ data, rows }) =>
                 <p className='fr-card__desc'>
                   {data.label && (
                     <span
-                      className={`card-label ${labelColors[data.label.couleur_du_label]}`}
+                      className={`card-label ${colorClass}`}
                       style={{ fontSize: '14px', display: 'block', marginTop: '0px', marginBottom: '16px' }}>
                       {data.label.titre_du_label}
                     </span>
@@ -53,36 +94,36 @@ export const DownloadCard = ({ data, rows }) =>
             {data.image_de_la_carte.data?.attributes.url && (
               <div className='fr-tile__header'>
                 <div className='fr-tile__pictogram'>
-                  <img src={data.image_de_la_carte.data.attributes.url} />
+                  <img src={data.image_de_la_carte.data.attributes.url} alt='Illustration' />
                 </div>
               </div>
             )}
           </div>
         </div>
       )}
-      {data.type_de_carte == 'Classique' && (
+      {data.type_de_carte === 'Classique' && (
         <div
           className={`fr-col-md-${12 / rows} fr-col`}
           key={data.id}
           style={
-            rows == 1
+            rows === 1
               ? {
                   display: 'flex',
-                  justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? '' : 'flex-end'
+                  justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? 'flex-start' : 'flex-end'
                 }
               : {}
           }>
           <div
-            className={`fr-card fr-enlarge-link fr-card--horizontal fr-card--horizontal-half mb2`}
-            style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
+            className='fr-card fr-enlarge-link fr-card--horizontal fr-card--horizontal-half mb2'
+            style={{ marginBottom: marginBottomValue }}>
             <div className='fr-card__body'>
               <div className='fr-card__content'>
                 <h3 className='fr-card__title blue-text'>{data.titre_de_la_carte}</h3>
                 <a
                   href={
-                    data.media_a_telecharger.data != null
+                    data.media_a_telecharger.data
                       ? data.media_a_telecharger.data.attributes.url
-                      : data.telechargement_externe
+                      : data.telechargement_externe || '#'
                   }
                   target='_blank'
                   hrefLang='fr'></a>
@@ -90,7 +131,7 @@ export const DownloadCard = ({ data, rows }) =>
                 <div className='fr-card__start'>
                   {data.label && (
                     <span
-                      className={`card-label ${labelColors[data.label.couleur_du_label]}`}
+                      className={`card-label ${colorClass}`}
                       style={{ fontSize: '14px', display: 'block', marginTop: '0px', marginBottom: '16px' }}>
                       {data.label.titre_du_label}
                     </span>
@@ -115,7 +156,7 @@ export const DownloadCard = ({ data, rows }) =>
                     className='fr-p-3w'
                     style={{ width: '100%', objectFit: 'contain' }}
                     src={data.image_de_la_carte.data.attributes.url}
-                    alt=''
+                    alt='Illustration'
                   />
                 </div>
               </div>
@@ -125,3 +166,4 @@ export const DownloadCard = ({ data, rows }) =>
       )}
     </>
   );
+};

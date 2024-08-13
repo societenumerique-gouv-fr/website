@@ -1,34 +1,52 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { marginsBottom } from '../structs';
 
-export const DownloadLink = ({ data, rows }) =>
-  data && (
+type DownloadLinkProps = {
+  data: {
+    id: string;
+    position: 'Centre' | 'Gauche' | 'Droite';
+    espacement_bas: keyof typeof marginsBottom;
+    titre_de_la_liste?: string;
+    Lien_telechargement: Array<{
+      actif: 'Oui' | 'Non';
+      texte_du_lien: string;
+      media_a_telecharger: {
+        data: { attributes: { url: string; name: string } } | null;
+      };
+    }>;
+  };
+  rows: number;
+};
+
+export const DownloadLink = ({ data, rows }: DownloadLinkProps) => {
+  if (!data) return null;
+
+  const marginBottomValue = marginsBottom[data.espacement_bas] || '0px';
+
+  return (
     <>
       {rows === 1 && (
         <div
           key={data.id}
           style={{
             display: 'flex',
-            justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? '' : 'flex-end'
+            justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? 'flex-start' : 'flex-end'
           }}>
           {data.Lien_telechargement && data.Lien_telechargement.length > 1 && (
-            <div className={`download-container`} style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
+            <div className='download-container' style={{ marginBottom: marginBottomValue }}>
               {data.titre_de_la_liste && <h4>{data.titre_de_la_liste}</h4>}
               <ul>
                 {data.Lien_telechargement.map((lien, index) => (
                   <li key={index}>
                     <a
-                      href={lien.media_a_telecharger.data !== null ? lien.media_a_telecharger.data.attributes.url : null}
-                      className={`fr-link--download fr-link ${lien.actif == 'Non' ? 'disable-download-link' : ''}`}
+                      href={lien.media_a_telecharger.data ? lien.media_a_telecharger.data.attributes.url : undefined}
+                      className={`fr-link--download fr-link ${lien.actif === 'Non' ? 'disable-download-link' : ''}`}
                       data-fr-assess-file='arraybuffer'
                       hrefLang='fr'
                       download
                       target='_blank'
                       id={`link-${index}`}>
                       {lien.texte_du_lien}
-                      <span className='fr-link__detail'> </span>
+                      <span className='fr-link__detail'></span>
                     </a>
                   </li>
                 ))}
@@ -41,23 +59,19 @@ export const DownloadLink = ({ data, rows }) =>
                 className='fr-link--download fr-link'
                 target='_blank'
                 id={`link-${data.id}`}
-                href={
-                  data.Lien_telechargement[0].media_a_telecharger.data !== null
-                    ? data.Lien_telechargement[0].media_a_telecharger.data.attributes.url
-                    : null
-                }>
+                href={data.Lien_telechargement[0].media_a_telecharger.data?.attributes.url}
+                download={data.Lien_telechargement[0].media_a_telecharger.data?.attributes.name}>
                 {data.Lien_telechargement[0].texte_du_lien}
-                <span className='fr-link__detail' />
+                <span className='fr-link__detail'></span>
               </a>
             </div>
           )}
         </div>
       )}
-
       {rows > 1 && (
-        <div key={data.id} style={{}}>
+        <div key={data.id}>
           {data.Lien_telechargement && data.Lien_telechargement.length > 1 && (
-            <div className={`download-container`}>
+            <div className='download-container' style={{ marginBottom: marginBottomValue }}>
               {data.titre_de_la_liste && <h4>{data.titre_de_la_liste}</h4>}
               <ul>
                 {data.Lien_telechargement.map((lien, index) => (
@@ -66,11 +80,11 @@ export const DownloadLink = ({ data, rows }) =>
                       className='fr-link--download fr-link'
                       data-fr-assess-file='bytes'
                       hrefLang='fr'
-                      download={lien.media_a_telecharger.data.attributes.name}
+                      download={lien.media_a_telecharger.data?.attributes.name}
                       id={`link-${index}`}
-                      href={lien.media_a_telecharger.data != null ? lien.media_a_telecharger.data.attributes.url : null}>
+                      href={lien.media_a_telecharger.data !== null ? lien.media_a_telecharger.data.attributes.url : undefined}>
                       {lien.texte_du_lien}
-                      <span className='fr-link__detail'> </span>
+                      <span className='fr-link__detail'></span>
                     </a>
                   </li>
                 ))}
@@ -83,15 +97,15 @@ export const DownloadLink = ({ data, rows }) =>
                 className='fr-link--download fr-link'
                 data-fr-assess-file='bytes'
                 hrefLang='fr'
-                download={data.Lien_telechargement[0].media_a_telecharger.data.attributes.name}
+                download={data.Lien_telechargement[0].media_a_telecharger.data?.attributes.name}
                 id={`link-${data.id}`}
                 href={
                   data.Lien_telechargement[0].media_a_telecharger.data !== null
                     ? data.Lien_telechargement[0].media_a_telecharger.data.attributes.url
-                    : null
+                    : undefined
                 }>
                 {data.Lien_telechargement[0].texte_du_lien}
-                <span className='fr-link__detail'> </span>
+                <span className='fr-link__detail'></span>
               </a>
             </div>
           )}
@@ -99,3 +113,4 @@ export const DownloadLink = ({ data, rows }) =>
       )}
     </>
   );
+};
