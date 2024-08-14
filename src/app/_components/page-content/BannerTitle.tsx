@@ -1,10 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { marginsBottom } from '../structs';
 
 type BannerTitleProps = {
@@ -32,8 +30,8 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
   }, [router.pathname]);
 
   useEffect(() => {
-    if (data.image != null && data.image.data != null) {
-      setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + data.image.data.attributes.url);
+    if (data.image?.data) {
+      setImageUrl(`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.data.attributes.url}`);
     }
   }, [data]);
 
@@ -55,12 +53,16 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
           {data.texte}
         </p>
         {imageUrl && (
-          <img
-            className='banner-image ml-auto mr-40'
-            style={{ maxWidth: '250px', transform: 'translate(15%, -82%)' }}
-            src={imageUrl}
-            alt={}
-          />
+          <div className='banner-image-container'>
+            <Image
+              className='banner-image'
+              src={imageUrl}
+              alt={data.titre || 'Banner image'}
+              width={250}
+              height={150}
+              style={{ maxWidth: '250px', transform: 'translate(15%, -82%)' }}
+            />
+          </div>
         )}
       </div>
     </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { marginsBottom } from '../structs';
 
@@ -41,7 +42,7 @@ export const Quote = ({ data }: QuoteProps) => {
       <blockquote cite=''>
         {imageUrl && (
           <div className='fr-quote__image'>
-            <img src={imageUrl} className='fr-responsive-img' alt='' />
+            <Image src={imageUrl} className='fr-responsive-img' alt='' />
           </div>
         )}
         <p>{data.citation}</p>

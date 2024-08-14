@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { labelColors, marginsBottom } from '../structs';
 
@@ -62,7 +63,7 @@ export const VerticalCard = ({ data, rows }: VerticalCardProps) => {
             </div>
             {imageUrl && (
               <div className='fr-card__header' style={{ height: '200px', overflow: 'hidden' }}>
-                <img className='fr-responsive-img' src={imageUrl} alt='' loading='lazy' />
+                <Image className='fr-responsive-img' src={imageUrl} alt='' loading='lazy' />
               </div>
             )}
           </div>
@@ -112,7 +113,7 @@ export const VerticalCard = ({ data, rows }: VerticalCardProps) => {
             </div>
             {imageUrl && (
               <div className='fr-card__header' style={{ height: '200px', overflow: 'hidden' }}>
-                <img className='fr-responsive-img' src={imageUrl} alt='' loading='lazy' style={{ width: cardWidth }} />
+                <Image className='fr-responsive-img' src={imageUrl} alt='' loading='lazy' style={{ width: cardWidth }} />
               </div>
             )}
           </div>
