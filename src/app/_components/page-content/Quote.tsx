@@ -1,29 +1,43 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import { marginsBottom } from '../structs';
 
-export const Quote = ({ data }) => {
-  const [position, setPosition] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+type QuoteProps = {
+  data: {
+    titre: string;
+    image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      } | null;
+    };
+    espacement_bas: keyof typeof marginsBottom;
+    citation: string;
+    auteur: string;
+    contexte: string;
+  };
+};
+
+export const Quote = ({ data }: QuoteProps) => {
+  const [position, setPosition] = useState<string>('ml-quote');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    if (data.image.data != null) {
-      setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + data.image.data.attributes.url);
+    if (data.image.data) {
+      setImageUrl(`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.data.attributes.url}`);
     }
-  }, [data]);
+  }, [data.image]);
 
   useEffect(() => {
-    imageUrl ? setPosition('mlauto') : setPosition('ml-quote');
+    setPosition(imageUrl ? 'ml-auto' : 'ml-quote');
   }, [imageUrl]);
 
   return (
     <figure
       className={`${position} fr-quote fr-quote--column margin-quote`}
-      style={{ maxWidth: !imageUrl ? '1000px' : '840px', marginBottom: marginsBottom[data.espacement_bas] }}>
+      style={{ maxWidth: !imageUrl ? '1000px' : '840px', marginBottom: marginsBottom[data.espacement_bas] || '0px' }}>
       <blockquote cite=''>
         {imageUrl && (
           <div className='fr-quote__image'>

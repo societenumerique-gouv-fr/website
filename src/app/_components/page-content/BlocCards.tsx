@@ -211,9 +211,7 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
           {/* breves */}
           {articleType == 'breve' &&
             subArticles[cursor - 1] &&
-            subArticles[cursor - 1].map((article) => (
-              <VerticalCard key={article.titre_de_la_carte} data={article} rows={undefined} />
-            ))}
+            subArticles[cursor - 1].map((article) => <VerticalCard key={article.titre_de_la_carte} data={article} rows={1} />)}
         </div>
       </div>
 
