@@ -94,7 +94,7 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
             {data.image_de_la_carte.data?.attributes.url && (
               <div className='fr-tile__header'>
                 <div className='fr-tile__pictogram'>
-                  <img src={data.image_de_la_carte.data.attributes.url} alt='Illustration' />
+                  <img src={data.image_de_la_carte.data.attributes.url} alt='' />
                 </div>
               </div>
             )}
@@ -156,7 +156,7 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
                     className='fr-p-3w'
                     style={{ width: '100%', objectFit: 'contain' }}
                     src={data.image_de_la_carte.data.attributes.url}
-                    alt='Illustration'
+                    alt=''
                   />
                 </div>
               </div>
