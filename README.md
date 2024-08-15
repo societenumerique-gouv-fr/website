@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Société Numérique Website
 
-## Getting Started
+<h2 id="about">🪧 About</h2>
 
-First, run the development server:
+Website contains Société Numérique web application for [Société Numérique website](https://societenumerique.gouv.fr), Website content is managed with Strapi : self hosted headless content management system.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📑 Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🪧 [About](#about)
+- 🤗 [Contributing](#contributing)
+- 📝 [License](#license)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<h2 id="contributing">🤗 Contributing</h2>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To contribute to Société Numérique website Content Management System, we invite you to consult the [contribution guide](./CONTRIBUTING.md).
+This guide will provide you with detailed instructions on how to set up the project locally, as well as how to submit contributions effectively
 
-## Learn More
+<h2 id="license">📝 License</h2>
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+See the repository's [LICENSE.md](./LICENSE.md) file.
