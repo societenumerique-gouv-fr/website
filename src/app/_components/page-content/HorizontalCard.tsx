@@ -20,7 +20,13 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
       <div
         className={`${rows === 1 ? `fr-grid-row fr-grid-row--gutters ${marginsBottom[data.espacement_bas]}` : `fr-col-md-${12 / rows} fr-col ${marginsBottom[data.espacement_bas]}}`}`}
         style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
-        <div className={`${rows === 1 ? 'fr-col-md-6 fr-mx-auto' : `fr-h-100`}`}>
+        <div
+          className={[
+            `${rows === 1 ? 'fr-col-md-6' : `fr-h-100`}`,
+            data.position === 'Centre' ? 'fr-mx-auto' : undefined,
+            data.position === 'Gauche' ? 'fr-mr-auto' : undefined,
+            data.position === 'Droite' ? 'fr-ms-auto' : undefined
+          ].join(' ')}>
           <Card
             start={
               data.labels.length > 0 && (
