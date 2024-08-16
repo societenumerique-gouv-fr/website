@@ -24,10 +24,10 @@ type DownloadCardLocalData = {
   titre_de_la_carte: string;
   description_de_la_carte: string;
   label?: {
-    couleur_du_label: string;
+    couleur_du_label: keyof typeof labelColors;
     titre_du_label: string;
   };
-  espacement_bas: string;
+  espacement_bas: keyof typeof marginsBottom;
   position: 'Centre' | 'Gauche' | 'Droite';
   telechargement_externe?: string;
 };
@@ -42,8 +42,8 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
     return null;
   }
 
-  const marginBottomValue = marginsBottom[data.espacement_bas as keyof typeof marginsBottom] || 'default';
-  const colorClass = labelColors[data.label?.couleur_du_label as keyof typeof labelColors] || 'defaultColorClass';
+  const marginBottomValue = marginsBottom[data.espacement_bas] || 'default';
+  const colorClass = data.label?.couleur_du_label ? labelColors[data.label.couleur_du_label] : 'defaultColorClass';
 
   return (
     <>
@@ -103,16 +103,15 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
       )}
       {data.type_de_carte === 'Classique' && (
         <div
-          className={`fr-col-md-${12 / rows} fr-col`}
-          key={data.id}
-          style={
+          className={[
             rows === 1
-              ? {
-                  display: 'flex',
-                  justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? 'flex-start' : 'flex-end'
-                }
-              : {}
-          }>
+              ? `fr-grid-row fr-grid-row--gutters ${marginsBottom[data.espacement_bas]} fr-col-md-6`
+              : `fr-col-md-${12 / rows} fr-col ${marginsBottom[data.espacement_bas]}}`,
+            data.position === 'Centre' ? 'fr-mx-auto' : undefined,
+            data.position === 'Gauche' ? 'fr-mr-auto' : undefined,
+            data.position === 'Droite' ? 'fr-ms-auto' : undefined
+          ].join(' ')}
+          key={data.id}>
           <div
             className='fr-card fr-enlarge-link fr-card--horizontal fr-card--horizontal-half mb2'
             style={{ marginBottom: marginBottomValue }}>
