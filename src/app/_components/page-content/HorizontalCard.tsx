@@ -3,6 +3,7 @@
 
 import Card from '@codegouvfr/react-dsfr/Card';
 import Tag from '@codegouvfr/react-dsfr/Tag';
+import Image from 'next/image';
 import React from 'react';
 
 const marginsBottom = {
@@ -49,7 +50,7 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
             horizontal
             imageComponent={
               data.image.data?.attributes.url ? (
-                <img
+                <Image
                   className='fr-p-3w'
                   style={{ width: '100%', objectFit: 'contain' }}
                   src={data.image.data.attributes.url}

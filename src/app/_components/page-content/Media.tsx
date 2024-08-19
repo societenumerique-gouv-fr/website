@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { marginsBottom } from '../structs';
@@ -70,7 +71,7 @@ export const Media = ({ data }: MediaProps) => {
         ) : (
           imageUrl && (
             <div>
-              <img src={imageUrl} className={width || ''} alt='Image du média' />
+              <Image src={imageUrl} className={width || ''} alt='Image du média' />
             </div>
           )
         )}

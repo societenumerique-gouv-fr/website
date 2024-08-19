@@ -201,18 +201,13 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
 
   useEffect(() => {
     subDivideArticles();
-    // Ajouter subDivideArticles comme dépendance
+    // Ajouté 'articles' et 'type' comme dépendances, déjà correct
   }, [articles, type]);
 
   useEffect(() => {
     updatePagination();
-    // Ajouter subArticles comme dépendance
-  }, [subArticles]);
-
-  useEffect(() => {
-    updatePagination();
-    // Ajouter cursor comme dépendance
-  }, [cursor]);
+    // Ajouté 'subArticles' comme dépendance, déjà correct
+  }, [subArticles, cursor]); // Ajout de 'cursor' comme dépendance ici aussi
 
   useEffect(() => {
     if (type != null) {

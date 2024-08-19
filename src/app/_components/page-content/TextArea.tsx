@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { Components } from 'react-markdown';
 import { marginsBottom, position } from '../structs';
 
 type TextAreaProps = {
@@ -22,12 +22,20 @@ const tabulations: Record<'Aucune' | 'Petite' | 'Moyenne' | 'Grande', string> = 
   Grande: '24%'
 };
 
-const components = {
-  a: ({ ...props }: any) => (
-    <Link href={props.href} target={props.href.includes('https') ? '_blank' : undefined}>
-      {props.children}
-    </Link>
-  )
+const components: Components = {
+  a: ({ href, children, ...props }) => {
+    if (!href) {
+      return <span {...props}>{children}</span>;
+    }
+
+    return (
+      <Link href={href} passHref>
+        <a target={href.includes('https') ? '_blank' : undefined} {...props}>
+          {children}
+        </a>
+      </Link>
+    );
+  }
 };
 
 export const TextArea = ({ data, row }: TextAreaProps) => {
