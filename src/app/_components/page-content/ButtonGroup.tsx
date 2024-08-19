@@ -1,11 +1,27 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { marginsBottom, position } from '../structs';
+
+type Button = {
+  page_cible: string;
+  sans_contour?: boolean;
+  couleur?: 'bleu' | 'autre';
+  taille?: 'Petit' | 'Moyen' | 'Grand';
+  afficher_icone?: boolean;
+  position_icone?: 'Droite' | 'Gauche';
+  texte?: string;
+};
+
+type DataButtonGroup = {
+  id: string;
+  espacement_entre_les_boutons: number[];
+  espacement_bas: string;
+  groupe_de_boutons: Button[];
+  position: 'left' | 'center' | 'right';
+  taille: 'Petit' | 'Moyen' | 'Grand';
+};
 
 const sizes = {
   Petit: 'fr-btn--sm',
@@ -13,9 +29,9 @@ const sizes = {
   Grand: 'fr-btn--lg'
 };
 
-export const ButtonGroup = ({ data, rows }) => {
-  const [localdata, setLocalData] = useState(null);
-  const [spacing, setSpacing] = useState(null);
+export const ButtonGroup = ({ data, rows }: { data: DataButtonGroup; rows: number }) => {
+  const [localdata, setLocalData] = useState<DataButtonGroup | null>(null);
+  const [spacing, setSpacing] = useState<number | null>(null);
 
   useEffect(() => {
     setLocalData(data);
@@ -23,7 +39,7 @@ export const ButtonGroup = ({ data, rows }) => {
 
   useEffect(() => {
     if (localdata) {
-      setSpacing(localdata.espacement_entre_les_boutons.slice(-2));
+      setSpacing(localdata.espacement_entre_les_boutons.slice(-2)[0]);
     }
   }, [localdata]);
 

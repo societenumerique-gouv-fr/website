@@ -1,46 +1,49 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+type DataBreadCrumb = {
+  id: string;
+  label: string;
+  href?: string;
+};
+
+const getFormatedText = (name: string): string => {
+  switch (name) {
+    case 'Actualites':
+      return 'Actualités';
+    case 'Breves':
+      return 'Brèves';
+    case 'Rapports strategiques':
+      return 'Rapports stratégiques';
+    case 'Etudes':
+      return 'Études';
+    case 'Notre media':
+      return 'Notre média';
+    default:
+      return decodeURI(name);
+  }
+};
+
 export const BreadCrumb = () => {
   const pathname = usePathname();
-  const [pathnameArray, setPathnameArrayArray] = useState<string[]>([]);
+  const [breadcrumbs, setBreadcrumbs] = useState<DataBreadCrumb[]>([]);
 
   useEffect(() => {
-    setPathnameArrayArray(pathname.replace(/^\/|\/$/, '').split('/'));
+    const pathArray = pathname.replace(/^\/|\/$/, '').split('/');
+    const breadcrumbsData: DataBreadCrumb[] = pathArray.map((path, index) => ({
+      id: `${index}`,
+      label: getFormatedText(path),
+      href: index < pathArray.length - 1 ? `/${pathArray.slice(0, index + 1).join('/')}` : undefined
+    }));
+    setBreadcrumbs(breadcrumbsData);
   }, [pathname]);
-
-  const getFormatedText = (name: string) => {
-    switch (name) {
-      case 'Actualites':
-        return 'Actualités';
-      case 'Breves':
-        return 'Brèves';
-      case 'Rapports strategiques':
-        return 'Rapports stratégiques';
-      case 'Etudes':
-        return 'Études';
-      case 'Notre media':
-        return 'Notre média';
-      default:
-        return decodeURI(name);
-    }
-  };
-
-  const isRapportsStrategiques = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'rapports-strategiques';
-  const isMedia = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'notre-media';
-  const isReview = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'notre-revue';
-  const isBreves = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'breves';
-  const isEtudes = pathnameArray && pathnameArray.length > 0 && pathnameArray[0] === 'etudes';
 
   return (
     <>
-      {pathnameArray && pathnameArray.length > 0 && pathnameArray[0] != 'accueil' && (
+      {breadcrumbs.length > 0 && breadcrumbs[0].label !== 'Accueil' && (
         <nav role='navigation' className='fr-breadcrumb' aria-label='vous êtes ici :'>
           <button className='fr-breadcrumb__button' aria-expanded='false' aria-controls='breadcrumb-1'>
             Voir le fil d’Ariane
@@ -52,47 +55,19 @@ export const BreadCrumb = () => {
                   Accueil
                 </Link>
               </li>
-              {isEtudes ||
-                isReview ||
-                isMedia ||
-                (isRapportsStrategiques && (
-                  <li>
-                    <Link className='fr-breadcrumb__link' href='/nos-ressources'>
-                      Nos Ressources
+              {breadcrumbs.map((crumb, index) => (
+                <li key={crumb.id}>
+                  {crumb.href ? (
+                    <Link className='fr-breadcrumb__link' href={crumb.href}>
+                      {crumb.label}
                     </Link>
-                  </li>
-                ))}
-              {isBreves && (
-                <li>
-                  <Link className='fr-breadcrumb__link' href='/actualites'>
-                    Actualités
-                  </Link>
+                  ) : (
+                    <a className='fr-breadcrumb__link' aria-current='page'>
+                      {crumb.label}
+                    </a>
+                  )}
                 </li>
-              )}
-              {pathnameArray.map((path, index) => {
-                const currName = path[0]?.toUpperCase() + path.split('-').join(' ').slice(1);
-                return (
-                  <>
-                    {index < pathnameArray.length - 1 && (
-                      <li>
-                        <Link
-                          key={path.id}
-                          className='fr-breadcrumb__link'
-                          href={`/${pathnameArray.slice(0, index + 1).join('/')}`}>
-                          {getFormatedText(currName)}
-                        </Link>
-                      </li>
-                    )}
-                    {index == pathnameArray.length - 1 && (
-                      <li>
-                        <a className='fr-breadcrumb__link' aria-current='page'>
-                          {getFormatedText(currName)}
-                        </a>
-                      </li>
-                    )}
-                  </>
-                );
-              })}
+              ))}
             </ol>
           </div>
         </nav>
