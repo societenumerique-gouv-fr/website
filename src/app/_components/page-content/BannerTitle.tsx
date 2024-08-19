@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { marginsBottom } from '../structs';
 
+type MarginBottomKeys = keyof typeof marginsBottom;
+
 type BannerTitleProps = {
   data: {
     key: string;
-    espacement_bas: string;
+    espacement_bas: MarginBottomKeys;
     titre: string;
     texte: string;
     image?: {
