@@ -1,3 +1,5 @@
+'use client';
+
 import { marginsBottom } from '../structs';
 import { ReactNode, useEffect, useState, useCallback } from 'react';
 import { VerticalCard } from './VerticalCard';
