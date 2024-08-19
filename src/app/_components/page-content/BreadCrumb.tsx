@@ -55,7 +55,7 @@ export const BreadCrumb = () => {
                   Accueil
                 </Link>
               </li>
-              {breadcrumbs.map((crumb, index) => (
+              {breadcrumbs.map((crumb) => (
                 <li key={crumb.id}>
                   {crumb.href ? (
                     <Link className='fr-breadcrumb__link' href={crumb.href}>
