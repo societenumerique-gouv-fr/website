@@ -37,8 +37,10 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
     }
   }, [data]);
 
+  const marginBottom = marginsBottom[data.espacement_bas] || '0';
+
   return (
-    <div key={data.key} className='bannertitle-container' style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
+    <div key={data.key} className='bannertitle-container' style={{ marginBottom }}>
       <h2
         style={{
           color: 'rgb(0, 0, 145)',

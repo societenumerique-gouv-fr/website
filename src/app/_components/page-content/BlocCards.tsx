@@ -1,7 +1,5 @@
-'use client';
-
 import { marginsBottom } from '../structs';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState, useCallback } from 'react';
 import { VerticalCard } from './VerticalCard';
 import { HorizontalCard } from './HorizontalCard';
 
@@ -42,7 +40,7 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
 
   const offset = 7;
 
-  const subDivideArticles = () => {
+  const subDivideArticles = useCallback(() => {
     const all: BlocCardArticle[][] = [];
     let sub: BlocCardArticle[] = [];
     const multiple = type === 'breve' ? 9 : 4;
@@ -56,9 +54,9 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
     });
     all.push(sub);
     setSubArticles(all.splice(1));
-  };
+  }, [articles, type]);
 
-  const updatePagination = () => {
+  const updatePagination = useCallback(() => {
     const tmpPagination: ReactNode[] = [];
 
     tmpPagination.push(
@@ -197,15 +195,15 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
       </>
     );
     setPagination(tmpPagination);
-  };
+  }, [cursor, subArticles]);
 
   useEffect(() => {
     subDivideArticles();
-  }, [articles, type]);
+  }, [subDivideArticles]);
 
   useEffect(() => {
     updatePagination();
-  }, [subArticles, cursor]);
+  }, [updatePagination, cursor]);
 
   useEffect(() => {
     if (type != null) {
