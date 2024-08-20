@@ -35,11 +35,14 @@ export const Banner = () => {
 
   const loadData = async () => {
     try {
-      const resp = await fetchData<{ data: { attributes: BannerData } }>(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/banniere`);
-      setTitle(resp.data.attributes.titre);
-      setTitleSize(resp.data.attributes.taille_du_titre);
-      setImageUrl(resp.data.attributes.image.data?.attributes.url || '');
-      setTitleColor(resp.data.attributes.couleur_du_titre);
+      const response = await fetchData(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/banniere`);
+      const data = await response.json(); // Typage après récupération
+      const bannerData: BannerData = data.data.attributes;
+
+      setTitle(bannerData.titre);
+      setTitleSize(bannerData.taille_du_titre);
+      setImageUrl(bannerData.image.data?.attributes.url || '');
+      setTitleColor(bannerData.couleur_du_titre);
     } catch (e) {
       console.log('Erreur', e);
     }
