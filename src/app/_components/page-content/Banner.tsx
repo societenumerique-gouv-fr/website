@@ -3,19 +3,6 @@
 import { useState, useEffect } from 'react';
 import { fetchData } from '@/functions/fetcher';
 
-type BannerData = {
-  titre: string;
-  taille_du_titre: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  image: {
-    data?: {
-      attributes: {
-        url: string;
-      };
-    };
-  };
-  couleur_du_titre: keyof typeof colors | null;
-};
-
 type Colors = {
   [key: string]: string;
 };
