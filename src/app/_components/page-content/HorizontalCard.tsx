@@ -50,7 +50,7 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
             horizontal
             imageComponent={
               data.image.data?.attributes.url ? (
-                <Image
+                <img
                   className='fr-p-3w'
                   style={{ width: '100%', objectFit: 'contain' }}
                   src={data.image.data.attributes.url}

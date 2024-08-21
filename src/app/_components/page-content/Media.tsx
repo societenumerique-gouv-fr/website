@@ -71,7 +71,7 @@ export const Media = ({ data }: MediaProps) => {
         ) : (
           imageUrl && (
             <div>
-              <Image src={imageUrl} className={width || ''} alt='Image du média' />
+              <img src={imageUrl} className={width || ''} alt='Image du média' />
             </div>
           )
         )}

@@ -95,7 +95,7 @@ export const ToolsDevicesContainer = ({ data, slug, type }: ToolsDevicesContaine
                     </p>
                   </div>
                   <div className='fr-card__header'>
-                    <Image
+                    <img
                       className='fr-responsive-img'
                       src={
                         process.env.NEXT_PUBLIC_STRAPI_URL +

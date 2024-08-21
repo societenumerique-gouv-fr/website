@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { labelColors, marginsBottom } from '../structs';
 
 type DownloadCardLocalData = {
@@ -95,7 +94,7 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
             {data.image_de_la_carte.data?.attributes.url && (
               <div className='fr-tile__header'>
                 <div className='fr-tile__pictogram'>
-                  <Image src={data.image_de_la_carte.data.attributes.url} alt='' layout='fill' objectFit='contain' />
+                  <img src={data.image_de_la_carte.data.attributes.url} alt='' layout='fill' objectFit='contain' />
                 </div>
               </div>
             )}
@@ -152,7 +151,7 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
             {data.image_de_la_carte.data?.attributes.url && (
               <div className='fr-card__header fr-col-md-4'>
                 <div className='fr-card__img'>
-                  <Image
+                  <img
                     className='fr-p-3w'
                     src={data.image_de_la_carte.data.attributes.url}
                     alt=''

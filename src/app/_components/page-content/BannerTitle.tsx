@@ -58,7 +58,7 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
         </p>
         {imageUrl && (
           <div className='banner-image-container'>
-            <Image
+            <img
               className='banner-image'
               src={imageUrl}
               alt={data.titre || 'Banner image'}
