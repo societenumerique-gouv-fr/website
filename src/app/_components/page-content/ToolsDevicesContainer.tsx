@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 type ToolsDevicesContainerProps = {
@@ -97,15 +96,10 @@ export const ToolsDevicesContainer = ({ data, slug, type }: ToolsDevicesContaine
                   <div className='fr-card__header'>
                     <img
                       className='fr-responsive-img'
-                      src={
-                        process.env.NEXT_PUBLIC_STRAPI_URL +
-                        (item.attributes.image.data?.attributes.url || '/uploads/placeholder_16x9_e6d60ccc52.png')
-                      }
-                      alt={item.attributes.titre_de_la_carte}
-                      width={366}
-                      height={200}
-                      style={{ minHeight: '200px' }}
+                      src={process.env.NEXT_PUBLIC_STRAPI_URL + '/uploads/placeholder_16x9_e6d60ccc52.png'}
+                      alt=''
                       loading='lazy'
+                      style={{ minHeight: '200px' }}
                     />
                   </div>
                 </div>

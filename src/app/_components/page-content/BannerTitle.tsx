@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { marginsBottom } from '../structs';
 
 type MarginBottomKeys = keyof typeof marginsBottom;
@@ -59,12 +58,10 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
         {imageUrl && (
           <div className='banner-image-container'>
             <img
-              className='banner-image'
-              src={imageUrl}
-              alt={data.titre || 'Banner image'}
-              width={250}
-              height={150}
+              className='banner-image ml-auto mr-40'
               style={{ maxWidth: '250px', transform: 'translate(15%, -82%)' }}
+              src={imageUrl}
+              alt={}
             />
           </div>
         )}

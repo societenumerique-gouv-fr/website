@@ -1,9 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+'use-client';
 
 import Card from '@codegouvfr/react-dsfr/Card';
 import Tag from '@codegouvfr/react-dsfr/Tag';
-import Image from 'next/image';
 import React from 'react';
 
 const marginsBottom = {
