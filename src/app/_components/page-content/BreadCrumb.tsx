@@ -75,7 +75,7 @@ export const BreadCrumb = () => {
                   </Link>
                 </li>
               )}
-              {breadcrumbs.map((breadcrumb, index) => {
+              {breadcrumbs.map((breadcrumb) => {
                 const currName = breadcrumb.label[0]?.toUpperCase() + breadcrumb.label.slice(1);
                 return (
                   <li key={breadcrumb.id}>
