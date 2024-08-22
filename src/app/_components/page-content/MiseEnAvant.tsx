@@ -26,7 +26,6 @@ export const MiseEnAvant = ({ data }: MiseEnAvantProps) => {
 
   return (
     <div className={`fr-callout`} style={{ marginTop: '32px', marginBottom: marginBottomValue }}>
-      {' '}
       {data.afficher_pictogramme && data.pictogramme_remixicon && (
         <div style={{ width: '25px', position: 'absolute', top: '16px', left: '16px' }}>
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
