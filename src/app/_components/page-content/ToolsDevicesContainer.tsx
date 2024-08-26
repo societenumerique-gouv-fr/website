@@ -15,7 +15,7 @@ type ImageData = {
   } | null;
 };
 
-type DataAttributes = {
+interface DataAttributes {
   type_element: string;
   liaison_avec: string;
   autres_liaisons: Liaison[] | null;
@@ -23,18 +23,18 @@ type DataAttributes = {
   texte_de_la_carte: string;
   updatedAt: string;
   image: ImageData;
-};
+}
 
-type DataElement = {
+interface DataElement {
   id: string | number;
   attributes: DataAttributes;
-};
+}
 
-type ToolsDevicesContainerProps = {
+interface ToolsDevicesContainerProps {
   data: DataElement[] | null;
   slug: string;
   type: string;
-};
+}
 
 export const ToolsDevicesContainer: React.FC<ToolsDevicesContainerProps> = ({ data, slug, type }) => {
   const [localData, setLocalData] = useState<DataElement[] | null>(null);
@@ -58,7 +58,7 @@ export const ToolsDevicesContainer: React.FC<ToolsDevicesContainerProps> = ({ da
         }
       });
 
-      const uniqueData = [...new Set(dataByRelationship)];
+      const uniqueData = Array.from(new Set(dataByRelationship));
       const sortedByUpdated = uniqueData.sort(
         (a, b) => new Date(b.attributes.updatedAt).getTime() - new Date(a.attributes.updatedAt).getTime()
       );
