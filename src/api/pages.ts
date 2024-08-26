@@ -14,7 +14,7 @@ export const getPagesMatchingSlug = async (slug: string[]): Promise<{ data: [Pag
   const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/pages?filters[nom_de_page][$eq]=${slug.join('/')}`);
 
   if (!response.ok) {
-    throw new Error('Impossible de récupérer les pages');
+    throw new Error('Impossible de récupérer la page correspondant au slug');
   }
 
   return response.json();
