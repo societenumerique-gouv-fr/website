@@ -4,17 +4,21 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import SkipLinks from '@codegouvfr/react-dsfr/SkipLinks';
 
-const SkipLinksPortal = ({
-  links,
-  elementId = 'skip-links'
-}: {
+interface SkipLinksPortalProps {
   links: { label: string; anchor: string }[];
   elementId?: string;
-}) => {
-  const [isMounted, setIsMounted] = useState(false);
+}
 
-  useEffect(() => setIsMounted(true), []);
+const SkipLinksPortal: React.FC<SkipLinksPortalProps> = ({ links, elementId = 'skip-links' }) => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
-  return isMounted ? createPortal(<SkipLinks links={links} />, document.getElementById(elementId) ?? document.body) : null;
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const targetElement = document.getElementById(elementId) ?? document.body;
+
+  return isMounted ? createPortal(<SkipLinks links={links} />, targetElement) : null;
 };
+
 export default SkipLinksPortal;
