@@ -2,7 +2,7 @@
 
 import { marginsBottom } from '../structs';
 import { ReactNode, useEffect, useState } from 'react';
-import { VerticalCard } from './VerticalCard';
+import { CardData, VerticalCard } from './VerticalCard';
 import { HorizontalCard } from './HorizontalCard';
 
 type BlocCardArticle = {
@@ -212,7 +212,15 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
           {articleType == 'breve' &&
             subArticles[cursor - 1] &&
             subArticles[cursor - 1].map((article) => (
-              <VerticalCard key={article.titre_de_la_carte} data={article} rows={undefined} />
+              <VerticalCard
+                key={article.titre_de_la_carte}
+                data={
+                  article as unknown as {
+                    attributes: CardData;
+                  }
+                }
+                rows={0}
+              />
             ))}
         </div>
       </div>
