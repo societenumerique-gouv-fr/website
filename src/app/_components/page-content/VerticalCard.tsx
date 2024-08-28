@@ -16,7 +16,7 @@ type ImageData = {
 export type CardData = {
   id: string;
   type: 'carte-verticale' | 'autre';
-  espacement_bas: string;
+  espacement_bas: keyof typeof marginsBottom;
   label: 'Evènement' | string;
   nom_de_page: string;
   titre_de_la_carte: string;
@@ -48,7 +48,10 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ data, rows, height, 
       <div key={data.attributes.id}>
         <div
           className='fr-card fr-enlarge-link'
-          style={{ height: '430px', marginBottom: marginsBottom[data.attributes.espacement_bas] }}>
+          style={{
+            height: '430px',
+            marginBottom: marginsBottom[data.attributes.espacement_bas] || '0px'
+          }}>
           <div className='fr-card__body card-img'>
             <div className='fr-card__content'>
               <p className={data.attributes.label === 'Evènement' ? 'fr-tag jaune' : 'fr-tag rose'}>{data.attributes.label}</p>
@@ -74,7 +77,7 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ data, rows, height, 
         style={{
           display: 'flex',
           justifyContent: rows > 1 ? 'center' : data.attributes.position === 'Centre' ? 'center' : '',
-          marginBottom: marginsBottom[data.attributes.espacement_bas]
+          marginBottom: marginsBottom[data.attributes.espacement_bas] || '0px'
         }}>
         <div className='fr-card fr-enlarge-link'>
           <div
@@ -83,14 +86,23 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ data, rows, height, 
               height: height && rows === 1 ? height : '',
               width: width && rows === 1 ? width : ''
             }}>
-            <div className='fr-card__content' style={{ paddingLeft: '16px', paddingRight: '16px', paddingTop: '0px' }}>
+            <div
+              className='fr-card__content'
+              style={{
+                paddingLeft: '16px',
+                paddingRight: '16px',
+                paddingTop: '0px'
+              }}>
               <div>
                 {data.attributes.labels.length > 0 &&
                   data.attributes.labels.map((label) => (
                     <span
                       key={label.titre_du_label}
                       className={`card-label ${labelColors['Violet']}`}
-                      style={{ fontSize: fontsizeLabel, color: 'rgb(0,0,185)' }}>
+                      style={{
+                        fontSize: fontsizeLabel,
+                        color: 'rgb(0,0,185)'
+                      }}>
                       {label.titre_du_label}
                     </span>
                   ))}
@@ -104,7 +116,7 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ data, rows, height, 
                 </Link>
               </h4>
               <p>
-                <strong>{data.attributes.texte_en_valeur}</strong> {text?.length > 0 ? text : data.attributes.texte}
+                <strong>{data.attributes.texte_en_valeur}</strong> {text && text.length > 0 ? text : data.attributes.texte}
               </p>
               <i className='ri-arrow-right-line vertical-card-arrow'></i>
             </div>
@@ -116,7 +128,9 @@ export const VerticalCard: React.FC<VerticalCardProps> = ({ data, rows, height, 
                 src={data.attributes.image.data.attributes.url}
                 alt=''
                 loading='lazy'
-                style={{ width: width && rows === 1 ? width : '' }}
+                style={{
+                  width: width && rows === 1 ? width : ''
+                }}
               />
             </div>
           )}

@@ -215,7 +215,7 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
               <VerticalCard
                 key={article.titre_de_la_carte}
                 data={
-                  article as {
+                  article as unknown as {
                     attributes: CardData;
                   }
                 }
