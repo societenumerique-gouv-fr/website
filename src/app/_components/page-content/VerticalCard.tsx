@@ -13,7 +13,7 @@ type ImageData = {
   };
 };
 
-type CardData = {
+export type CardData = {
   id: string;
   type: 'carte-verticale' | 'autre';
   espacement_bas: string;
