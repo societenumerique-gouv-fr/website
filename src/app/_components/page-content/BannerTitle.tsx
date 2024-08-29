@@ -1,16 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { marginsBottom } from '../structs';
 
+type MarginBottomKeys = keyof typeof marginsBottom;
+
 type BannerTitleProps = {
   data: {
     key: string;
-    espacement_bas: string;
+    espacement_bas: MarginBottomKeys;
     titre: string;
     texte: string;
     image?: {
@@ -32,13 +31,15 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
   }, [router.pathname]);
 
   useEffect(() => {
-    if (data.image != null && data.image.data != null) {
-      setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + data.image.data.attributes.url);
+    if (data.image?.data) {
+      setImageUrl(`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.data.attributes.url}`);
     }
   }, [data]);
 
+  const marginBottom = marginsBottom[data.espacement_bas] || '0';
+
   return (
-    <div key={data.key} className='bannertitle-container' style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
+    <div key={data.key} className='bannertitle-container' style={{ marginBottom }}>
       <h2
         style={{
           color: 'rgb(0, 0, 145)',
@@ -49,18 +50,19 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
         }}>
         {data.titre}
       </h2>
-
       <div className='inline'>
         <p style={{ maxWidth: '550px', margin: '0 auto', fontSize: '20px', lineHeight: '1.3', paddingTop: '1rem' }}>
           {data.texte}
         </p>
         {imageUrl && (
-          <img
-            className='banner-image ml-auto mr-40'
-            style={{ maxWidth: '250px', transform: 'translate(15%, -82%)' }}
-            src={imageUrl}
-            alt={}
-          />
+          <div className='banner-image-container'>
+            <img
+              className='banner-image ml-auto mr-40'
+              style={{ maxWidth: '250px', transform: 'translate(15%, -82%)' }}
+              src={imageUrl}
+              alt={data.titre || 'Banner image'}
+            />
+          </div>
         )}
       </div>
     </div>
