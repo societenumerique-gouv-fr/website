@@ -1,39 +1,49 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { marginsBottom, position } from '../structs';
 
-export const NavLink = ({ data, rows }) => {
-  const [linkData, setLinkData] = useState([]);
-  const [size, setSize] = useState([]);
+type LinkData = {
+  id: string;
+  taille: 'Petit' | 'Moyen' | 'Grand';
+  page_cible: string;
+  texte: string;
+  espacement_bas: keyof typeof marginsBottom;
+  position: keyof typeof position;
+};
+
+type NavLinkProps = {
+  data: LinkData;
+  rows: number;
+};
+
+export const NavLink: React.FC<NavLinkProps> = ({ data, rows }) => {
+  const [linkData, setLinkData] = useState<LinkData | null>(null);
+  const [size, setSize] = useState<string>('');
 
   useEffect(() => {
     setLinkData(data);
     switch (data.taille) {
       case 'Petit':
-        setSize('ma classe fr-link fr-link--sm');
-        break;
-
       case 'Moyen':
         setSize('ma classe fr-link fr-link--sm');
         break;
-
       case 'Grand':
         setSize('ma classe fr-link fr-link--lg');
         break;
     }
   }, [data]);
+
+  if (!linkData) return null;
+
   return (
     <>
-      {rows == 1 && (
+      {rows === 1 && (
         <div
           key={linkData.id}
           className={`${position[linkData.position] === 'left' || position[linkData.position] === 'right' ? position[linkData.position] : 'center'}`}
-          style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
+          style={{ marginBottom: marginsBottom[data.espacement_bas] ?? undefined }}>
           <Link
             href={linkData.page_cible}
             className={`${size}`}
