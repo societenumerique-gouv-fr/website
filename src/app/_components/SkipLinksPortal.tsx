@@ -16,9 +16,7 @@ const SkipLinksPortal: React.FC<SkipLinksPortalProps> = ({ links, elementId = 's
     setIsMounted(true);
   }, []);
 
-  const targetElement = document.getElementById(elementId) ?? document.body;
-
-  return isMounted ? createPortal(<SkipLinks links={links} />, targetElement) : null;
+  return isMounted ? createPortal(<SkipLinks links={links} />, document.getElementById(elementId) ?? document.body) : null;
 };
 
 export default SkipLinksPortal;
