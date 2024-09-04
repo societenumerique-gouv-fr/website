@@ -26,11 +26,11 @@ const components: Components = {
       return <span {...props}>{children}</span>;
     }
 
+    const target = href.includes('https') ? '_blank' : undefined;
+
     return (
-      <Link href={href} passHref>
-        <a target={href.includes('https') ? '_blank' : undefined} {...props}>
-          {children}
-        </a>
+      <Link href={href} passHref target={target} rel={target ? 'noopener noreferrer' : undefined}>
+        {children}
       </Link>
     );
   }
