@@ -20,6 +20,7 @@ const tabulations: Record<'Aucune' | 'Petite' | 'Moyenne' | 'Grande', string> = 
   Grande: '24%'
 };
 
+
 const components: Components = {
   a: ({ href, children, ...props }) => {
     if (!href) {

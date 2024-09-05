@@ -1,22 +1,37 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+'use client';
 
-export const sortArticles = (articles, exclude) => {
-  let datesList = [];
-  const mostRecentArticles = [];
+type ArticleAttributes = {
+  updatedAt: string;
+};
+
+type Article = {
+  attributes: ArticleAttributes;
+};
+
+type Category = {
+  data: Article[];
+};
+
+export const sortArticles = (articles: Category[], exclude: number[]): ArticleAttributes[] => {
+  let datesList: string[] = [];
+  const mostRecentArticles: ArticleAttributes[] = [];
 
   articles.forEach((category, index) => {
     category.data.forEach((data) => {
-      if (exclude.indexOf(index) == -1) datesList.push(data.attributes.updatedAt);
+      if (!exclude.includes(index)) {
+        datesList.push(data.attributes.updatedAt);
+      }
     });
   });
 
-  datesList = datesList.sort((a, b) => new Date(b) - new Date(a));
+  datesList = datesList.sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
   for (let i = 0; i < datesList.length; i++) {
     articles.forEach((category) => {
       category.data.forEach((data) => {
-        if (data.attributes.updatedAt === datesList[i]) mostRecentArticles.push(data.attributes);
+        if (data.attributes.updatedAt === datesList[i]) {
+          mostRecentArticles.push(data.attributes);
+        }
       });
     });
   }
