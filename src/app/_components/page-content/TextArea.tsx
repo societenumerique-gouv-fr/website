@@ -20,17 +20,18 @@ const tabulations: Record<'Aucune' | 'Petite' | 'Moyenne' | 'Grande', string> = 
   Grande: '24%'
 };
 
+
 const components: Components = {
   a: ({ href, children, ...props }) => {
     if (!href) {
       return <span {...props}>{children}</span>;
     }
 
+    const target = href.includes('https') ? '_blank' : undefined;
+
     return (
-      <Link href={href} passHref>
-        <a target={href.includes('https') ? '_blank' : undefined} {...props}>
-          {children}
-        </a>
+      <Link href={href} passHref target={target} rel={target ? 'noopener noreferrer' : undefined}>
+        {children}
       </Link>
     );
   }
