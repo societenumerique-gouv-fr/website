@@ -1,8 +1,6 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { marginsBottom } from '../structs';
+
+type Taille = 'Petit' | 'Moyen' | 'Grand';
 
 type MediaProps = {
   data: {
@@ -14,12 +12,10 @@ type MediaProps = {
         };
       } | null;
     };
-    lien_video: string | null;
-    description: string;
-    lien_du_label: string | null;
-    titre_du_label: string;
+    lien_video?: string;
+    description?: string;
     afficher_transcription: 'Oui' | 'Non';
-    taille: 'Petit' | 'Moyen' | 'Grand';
+    taille: Taille;
     espacement_bas: keyof typeof marginsBottom;
     transcription_ouverte: boolean;
     position: 'Centre' | string;
@@ -27,65 +23,37 @@ type MediaProps = {
   };
 };
 
+const widthMap: Record<Taille, number> = {
+  Petit: 500,
+  Moyen: 700,
+  Grand: 900
+};
+
 export const Media = ({ data }: MediaProps) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [width, setWidth] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!data.image?.data && !data.lien_video) {
-      setImageUrl(process.env.NEXT_PUBLIC_STRAPI_URL + '/uploads/placeholder_16x9_e6d60ccc52.png');
-    } else if (data.image?.data) {
-      setImageUrl(data.image.data.attributes.url);
-    }
-    if (data.lien_video) {
-      setVideoUrl(data.lien_video.replace('watch?v=', 'embed/'));
-    }
-
-    switch (data.taille) {
-      case 'Petit':
-        setWidth('media-img500px');
-        break;
-      case 'Moyen':
-        setWidth('media-img700px');
-        break;
-      case 'Grand':
-        setWidth('media-img900px');
-        break;
-      default:
-        setWidth(null);
-    }
-  }, [data]);
   const marginBottom = marginsBottom[data.espacement_bas] || '0px';
+
   return (
     <div className='mt2' style={{ marginLeft: '20px', marginBottom }}>
       <figure role='group' className={`fr-content-media`} style={{ margin: data.position === 'Centre' ? '0 auto' : '' }}>
-        {videoUrl ? (
-          <iframe
-            title="Titre de l'iframe"
-            className='fr-responsive-vid fr-ratio-4x3'
-            src={videoUrl}
-            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-            allowFullScreen></iframe>
+        {data.lien_video ? (
+          <div style={{ width: `${widthMap[data.taille]}px` }}>
+            <iframe
+              title="Titre de l'iframe"
+              className='fr-responsive-vid fr-ratio-4x3'
+              src={data.lien_video.replace('watch?v=', 'embed/').replace(/&.+/, '')}
+              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+              allowFullScreen></iframe>
+            {data.description && <p className='fr-mt-2w'>{data.description}</p>}
+          </div>
         ) : (
-          imageUrl && (
+          data.image.data?.attributes.url && (
             <div>
-              <img src={imageUrl} className={width || ''} alt='Image du média' />
+              <img src={data.image.data.attributes.url} style={{ width: `${widthMap[data.taille]}px` }} alt='' />
             </div>
           )
         )}
-        <figcaption className={`fr-content-media__caption ${width || ''}`} style={{ marginLeft: '50px' }}>
-          {data.lien_du_label && (
-            <Link
-              href={data.lien_du_label}
-              target={data.lien_du_label.includes('https://') ? '_blank' : undefined}
-              className='fr-link'>
-              {data.titre_du_label}
-            </Link>
-          )}
-        </figcaption>
         {data.afficher_transcription === 'Oui' && (
-          <div className={`fr-transcription ${width || ''}`}>
+          <div className='fr-transcription' style={{ width: `${widthMap[data.taille]}px` }}>
             <button
               className='fr-transcription__btn'
               aria-expanded={data.transcription_ouverte ? 'true' : 'false'}
