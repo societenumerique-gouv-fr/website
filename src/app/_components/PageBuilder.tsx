@@ -29,35 +29,9 @@ import { BreadCrumb } from './page-content/BreadCrumb';
 import { ToolsDevicesContainer } from './page-content/ToolsDevicesContainer';
 
 export const PageBuilder = ({ data, dataArticles, dataToolsDevices = null, slug = null, isHome }) => {
-  // const [fluxPublications, setFluxPublications] = useState([]);
-  // const [fluxActualites, setFluxActualites] = useState([]);
-  // const [strategiques, setStrategiques] = useState([]);
-  // const [recherches, setRecherch/es] = useState([]);
-  // const [bannerTitle, setBannerTitle] = useState(null);
-  // const pathname = usePathname();
-
   const allComponents = buildComponents(data);
   const struct = buildSections(allComponents);
   const array = struct[1] ?? [];
-
-  // useEffect(() => {
-  //   if (dataArticles.length > 0) {
-  //     const withoutBreves = sortArticles(dataArticles, [0]);
-  //     const onlyStrategiques = sortArticles(dataArticles, [0, 2]);
-  //     const onlyRecherches = sortArticles(dataArticles, [0, 1]);
-  //
-  //     setFluxPublications(withoutBreves.slice(0, 2));
-  //     setFluxActualites(onlyBreves.slice(0, 3));
-  //
-  //     setBreves(onlyBreves);
-  //     setStrategiques(onlyStrategiques);
-  //     setRecherches(onlyRecherches);
-  //   }
-  // }, [dataArticles]);
-  //
-  // useEffect(() => {
-  //   setBannerTitle(null);
-  // }, [pathname]);
 
   return (
     <>
@@ -115,9 +89,9 @@ export const PageBuilder = ({ data, dataArticles, dataToolsDevices = null, slug 
               return (
                 <div className='flexrow-container' style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
                   <div className='grid3'>
-                    {fluxActualites &&
-                      fluxActualites.map((flux) => {
-                        return <VerticalCard key={flux.titre_de_la_carte} data={flux} rows={3} />;
+                    {dataArticles &&
+                      dataArticles.map(({ attributes }) => {
+                        return <VerticalCard key={attributes.titre_de_la_carte} data={attributes} rows={3} />;
                       })}
                   </div>
                 </div>

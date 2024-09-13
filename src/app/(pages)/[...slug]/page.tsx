@@ -4,6 +4,8 @@ import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
 import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
+import { getBreves } from '@/api/breves';
+import { byPubicationDate } from '@/ressources/collection-operations';
 
 export const generateMetadata = async ({ params: { slug } }: { params: { slug: string[] } }): Promise<Metadata> => {
   const page = toSinglePage(await getPagesMatchingSlug(slug));
@@ -15,6 +17,7 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
 
 const Page = async ({ params: { slug } }: { params: { slug: string[] } }) => {
   const page = toSinglePage(await getPagesMatchingSlug(slug));
+  const breves = await getBreves();
 
   if (page == null) return <NotFound />;
 
@@ -22,7 +25,7 @@ const Page = async ({ params: { slug } }: { params: { slug: string[] } }) => {
     <>
       <SkipLinksPortal links={defaultSkipLinks} />
       <main id={contentId}>
-        <PageBuilder data={page.Composants} dataArticles={[]} isHome={false} />
+        <PageBuilder data={page.Composants} dataArticles={[...breves.data].sort(byPubicationDate).slice(0, 3)} isHome={false} />
       </main>
     </>
   );
