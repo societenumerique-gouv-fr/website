@@ -103,7 +103,7 @@ export const PageBuilder = ({ data, dataArticles, dataToolsDevices = null, slug 
             case 'ancre':
               return <div className='translate-header-margin' id={e.ancre} />;
             case 'bloc-de-breves':
-              return <BlocCards articles={dataArticles} type='breve' />;
+              return <BlocCards articles={dataArticles.map((article) => article.attributes)} type='breve' />;
             case 'bloc-de-publications-strategiques':
               return <BlocCards articles={strategiques} type='rapport-strategique' />;
             case 'bloc-de-rapports-de-recherches':
