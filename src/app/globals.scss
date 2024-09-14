@@ -130,10 +130,6 @@
   padding-bottom: 0.35rem;
 }
 
-.sublink:hover {
-  background-color: rgb(245 245 254) !important;
-}
-
 .subspace {
   margin-left: 0.6rem;
   margin-right: 0.3rem;
@@ -272,10 +268,6 @@
 .anchor {
   line-height: 3rem;
   display: block;
-  transition: 1s;
-}
-
-.anchor:hover {
   transition: 1s;
 }
 
@@ -799,34 +791,11 @@
   transform: translateY(460px);
 }
 
-.hover-horizontalcard:hover {
-  background-color: rgb(247 247 248) !important;
-}
-
 .sticky-header {
   position: sticky;
   z-index: 999;
   top: 0;
   transform: translateY(-120px);
-}
-
-.title-anti-enlarge.fr-enlarge-link:hover {
-  background-color: transparent;
-}
-
-.hover-title-link.fr-link.fr-link--sm {
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 3px;
-}
-
-.hover-title-link.fr-link.fr-link--sm:active {
-  background-color: #cacafb;
-}
-
-.hover-title-link.fr-link.fr-link--sm:hover {
-  background-color: #e3e3fd;
-  border-radius: 40px;
 }
 
 .headerlink.sublink::after {
@@ -886,10 +855,6 @@
   padding: 20px;
   width: 70%;
   border: 1px solid rgb(221 221 221);
-}
-
-.rollingcard-container:hover {
-  background-color: rgb(252 252 252);
 }
 
 .rollingcard-content {
