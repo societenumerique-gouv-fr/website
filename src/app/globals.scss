@@ -391,22 +391,6 @@
   width: 1000px;
 }
 
-.bloc-simple [target='_blank']::after {
-  content: none;
-}
-
-.linkcard [target='_blank']::after {
-  content: none !important;
-}
-
-.horizontal-container [target='_blank']::after {
-  content: none;
-}
-
-.fr-card [target='_blank']::after {
-  content: none;
-}
-
 .fr-btn--close.fr-btn:focus {
   display: none;
 }
