@@ -8,6 +8,8 @@ import { getBreves } from '@/api/breves';
 import { toSinglePage } from '@/api/pages';
 import { getRapportsDeRecherches } from '@/api/rapports-de-recherches';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
+import { BreveResource } from '@/ressources/breve-resource';
+import { RapportDeRechercheResource } from '@/ressources/rapport-de-recherche-resource';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -32,7 +34,12 @@ const HomePage = async () => {
       <main id={contentId}>
         <PageBuilder
           data={page.Composants}
-          dataArticles={[...rapportsDeRecherches.data, ...breves.data].sort(byPubicationDate).slice(0, 2).map(toAttributes)}
+          dataArticles={
+            [...rapportsDeRecherches.data, ...breves.data].sort(byPubicationDate).slice(0, 2).map(toAttributes) as unknown as (
+              | BreveResource
+              | RapportDeRechercheResource
+            )[]
+          }
           isHome={true}
         />
       </main>

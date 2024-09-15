@@ -22,7 +22,24 @@ const BrevePage = async ({ params: { slug } }: { params: { slug: string } }) => 
     <>
       <SkipLinksPortal links={defaultSkipLinks} />
       <main id={contentId}>
-        <PageBuilder data={breve.composants} dataArticles={[]} isHome={false} />
+        <PageBuilder
+          data={breve.composants}
+          dataArticles={[]}
+          isHome={false}
+          breadCrumbItems={[
+            {
+              label: 'Actualités',
+              href: '/actualites'
+            },
+            {
+              label: 'Brèves',
+              href: '/actualites/breves'
+            },
+            {
+              label: breve.titre_de_la_carte
+            }
+          ]}
+        />
       </main>
     </>
   );

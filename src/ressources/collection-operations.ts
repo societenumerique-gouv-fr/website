@@ -1,4 +1,11 @@
-export const toAttributes = ({ attributes }: { attributes: unknown }) => attributes;
+import { BreveResource } from './breve-resource';
+import { RapportDeRechercheResource } from './rapport-de-recherche-resource';
+
+export const toAttributes = ({
+  attributes
+}: {
+  attributes: BreveResource['attributes'] | RapportDeRechercheResource['attributes'];
+}) => attributes;
 
 export const byPubicationDate = (
   { attributes: { publishedAt: publishedAt1 } }: { attributes: { publishedAt: Date } },
