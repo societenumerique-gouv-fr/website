@@ -21,7 +21,20 @@ const EtudesPage = async () => {
     <>
       <SkipLinksPortal links={defaultSkipLinks} />
       <main id={contentId}>
-        <PageBuilder data={page.Composants} dataArticles={etudes.data.sort(byPubicationDate) ?? []} isHome={false} />
+        <PageBuilder
+          data={page.Composants}
+          dataArticles={etudes.data.sort(byPubicationDate) ?? []}
+          isHome={false}
+          breadCrumbItems={[
+            {
+              label: 'Nos ressources',
+              href: '/nos-ressources'
+            },
+            {
+              label: 'Nos études et évaluations'
+            }
+          ]}
+        />
       </main>
     </>
   );

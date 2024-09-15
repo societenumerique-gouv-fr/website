@@ -1,9 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { buildComponents, buildSections } from '@/functions/componentsbuilder';
-import { TextArea } from './page-content/TextArea';
 import React from 'react';
+import { buildComponents, buildSections } from '@/functions/componentsbuilder';
+import { BreadcrumbItem, NavbarNavigationItems } from '@/presenters/navbar/navigation-item';
+import { BreveResource } from '@/ressources/breve-resource';
+import { RapportDeRechercheResource } from '@/ressources/rapport-de-recherche-resource';
+import { TextArea } from './page-content/TextArea';
 import { labelColors } from './structs';
 import { position } from './structs';
 import { marginsBottom } from './structs';
@@ -28,7 +31,22 @@ import { RollingCard } from './page-content/RollingCard';
 import { BreadCrumb } from './page-content/BreadCrumb';
 import { ToolsDevicesContainer } from './page-content/ToolsDevicesContainer';
 
-export const PageBuilder = ({ data, dataArticles, dataToolsDevices = null, slug = null, isHome }) => {
+export const PageBuilder = ({
+  data,
+  dataArticles,
+  navbarNavigationItems,
+  breadCrumbItems = [],
+  dataToolsDevices = null,
+  slug,
+  isHome
+}: {
+  data: unknown[];
+  dataArticles: (BreveResource | RapportDeRechercheResource)[];
+  navbarNavigationItems?: NavbarNavigationItems;
+  breadCrumbItems?: BreadcrumbItem[];
+  slug?: string;
+  isHome: boolean;
+}) => {
   const allComponents = buildComponents(data);
   const struct = buildSections(allComponents);
   const array = struct[1] ?? [];
@@ -37,7 +55,7 @@ export const PageBuilder = ({ data, dataArticles, dataToolsDevices = null, slug 
     <>
       {isHome && <Banner />}
       <div className='fr-container mb2'>
-        {!isHome && <BreadCrumb />}
+        {!isHome && <BreadCrumb breadCrumbItems={breadCrumbItems} navbarNavigationItems={navbarNavigationItems} />}
         {array.map((e) => {
           switch (e.type) {
             case 'badge':
@@ -103,11 +121,11 @@ export const PageBuilder = ({ data, dataArticles, dataToolsDevices = null, slug 
             case 'ancre':
               return <div className='translate-header-margin' id={e.ancre} />;
             case 'bloc-de-breves':
-              return <BlocCards articles={dataArticles.map((article) => article.attributes)} type='breve' />;
+              return <BlocCards articles={dataArticles.map(({ attributes }) => attributes)} type='breve' />;
             case 'bloc-de-publications-strategiques':
               return <BlocCards articles={strategiques} type='rapport-strategique' />;
             case 'bloc-de-rapports-de-recherches':
-              return <BlocCards articles={dataArticles.map((article) => article.attributes)} type='etude' />;
+              return <BlocCards articles={dataArticles.map(({ attributes }) => attributes)} type='etude' />;
             case 'citation':
               return <Quote data={e} />;
             case 'mise-en-avant':

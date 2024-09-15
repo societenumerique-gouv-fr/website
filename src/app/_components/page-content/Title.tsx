@@ -19,7 +19,7 @@ export const Title = ({ data }: TitleProps) => {
 
   return (
     <div
-      className={`title-anti-enlarge fr-enlarge-link ${positionClass === 'left' || positionClass === 'right' ? positionClass : 'center'}`}
+      className={`${positionClass === 'left' || positionClass === 'right' ? positionClass : 'center'}`}
       style={{
         marginTop: '16px',
         marginBottom: marginsBottom[data.espacement_bas] || '0px'

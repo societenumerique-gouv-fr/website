@@ -22,7 +22,24 @@ const EtudesPage = async ({ params: { slug } }: { params: { slug: string } }) =>
     <>
       <SkipLinksPortal links={defaultSkipLinks} />
       <main id={contentId}>
-        <PageBuilder data={etude.composants} dataArticles={[]} isHome={false} />
+        <PageBuilder
+          data={etude.composants}
+          dataArticles={[]}
+          isHome={false}
+          breadCrumbItems={[
+            {
+              label: 'Nos ressources',
+              href: '/nos-ressources'
+            },
+            {
+              label: 'Nos études et évaluations',
+              href: '/nos-ressources/etudes'
+            },
+            {
+              label: etude.titre_de_la_carte
+            }
+          ]}
+        />
       </main>
     </>
   );

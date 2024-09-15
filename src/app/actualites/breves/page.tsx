@@ -21,7 +21,20 @@ const BrevesPage = async () => {
     <>
       <SkipLinksPortal links={defaultSkipLinks} />
       <main id={contentId}>
-        <PageBuilder data={page.Composants} dataArticles={breves.data.sort(byPubicationDate) ?? []} isHome={false} />
+        <PageBuilder
+          data={page.Composants}
+          dataArticles={breves.data.sort(byPubicationDate) ?? []}
+          isHome={false}
+          breadCrumbItems={[
+            {
+              label: 'Actualités',
+              href: '/actualites'
+            },
+            {
+              label: 'Brèves'
+            }
+          ]}
+        />
       </main>
     </>
   );
