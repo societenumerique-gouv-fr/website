@@ -57,39 +57,32 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
       ].join(' ')}
       key={data.id}>
       <div
-        className='fr-card fr-enlarge-link fr-card--horizontal fr-card--horizontal-half mb2'
+        className='fr-card fr-enlarge-link fr-card--download fr-card--horizontal fr-card--horizontal-half mb2'
         style={{ marginBottom: marginBottomValue }}>
         <div className='fr-card__body'>
           <div className='fr-card__content'>
-            <h3 className='fr-card__title blue-text'>{data.titre_de_la_carte}</h3>
-            <a
-              href={
-                data.media_a_telecharger.data
-                  ? data.media_a_telecharger.data.attributes.url
-                  : data.telechargement_externe || '#'
-              }
-              target='_blank'
-              hrefLang='fr'></a>
-            <p className='fr-card__desc'>{data.description_de_la_carte}</p>
-            <div className='fr-card__start'>
-              {data.label && (
+            <h3 className='fr-card__title'>
+              <a
+                href={
+                  data.media_a_telecharger.data
+                    ? data.media_a_telecharger.data.attributes.url
+                    : data.telechargement_externe || '#'
+                }
+                target='_blank'
+                hrefLang='fr'>
+                {data.titre_de_la_carte}
+              </a>
+            </h3>
+            {data.description_de_la_carte && <p className='fr-card__desc'>{data.description_de_la_carte}</p>}
+            {data.label && (
+              <div className='fr-card__start'>
                 <span
                   className={`card-label ${colorClass}`}
                   style={{ fontSize: '14px', display: 'block', marginTop: '0px', marginBottom: '16px' }}>
                   {data.label.titre_du_label}
                 </span>
-              )}
-            </div>
-            <div className='fr-card__end'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                style={{ width: '25px', position: 'absolute', right: '24px', bottom: '24px' }}
-                viewBox='0 0 24 24'>
-                <path
-                  d='M3 19H21V21H3V19ZM13 13.1716L19.0711 7.1005L20.4853 8.51472L12 17L3.51472 8.51472L4.92893 7.1005L11 13.1716V2H13V13.1716Z'
-                  fill='#000091'></path>
-              </svg>
-            </div>
+              </div>
+            )}
           </div>
         </div>
         {data.image_de_la_carte.data?.attributes.url && (
