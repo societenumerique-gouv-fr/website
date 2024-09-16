@@ -59,11 +59,11 @@ export const PageBuilder = ({
         {!isHome && <BreadCrumb breadCrumbItems={breadCrumbItems} navbarNavigationItems={navbarNavigationItems} />}
         <div className='fr-grid-row gutter'>
           {navigationComponent && (
-            <div className='fr-col-3'>
+            <div className='fr-col-md-3 fr-col-12'>
               <AnchorNavigator data={navigationComponent} />
             </div>
           )}
-          <div className={navigationComponent ? 'fr-col-9' : 'fr-col-12'}>
+          <div className={navigationComponent ? 'fr-col-md-9 fr-col-12' : 'fr-col-12'}>
             {array.map((e) => {
               switch (e.type) {
                 case 'badge':
