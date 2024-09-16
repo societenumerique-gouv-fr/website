@@ -222,9 +222,13 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
         subArticles[cursor - 1] &&
         subArticles[cursor - 1].map((article) => <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />)}
       {/* rapports de recherches */}
-      {articleType == 'etude' &&
-        subArticles[cursor - 1] &&
-        subArticles[cursor - 1].map((article) => <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />)}
+      {articleType == 'etude' && subArticles[cursor - 1] && (
+        <div className='fr-grid-row fr-grid-row--gutters'>
+          {subArticles[cursor - 1].map((article) => (
+            <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />
+          ))}
+        </div>
+      )}
 
       <div className='flexrow-container'>
         <nav role='navigation' className='fr-pagination' aria-label='Pagination'>

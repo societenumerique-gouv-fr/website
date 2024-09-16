@@ -69,19 +69,21 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
     )}
 
     {data.type != 'carte-horizontale' && (
-      <Card
-        className='fr-mb-2w'
-        start={
-          <Tag className='fr-mb-1w fr-tag--blue-france fr-text--capitalize' small>
-            {data.type}
-          </Tag>
-        }
-        title={data.titre_de_la_carte}
-        desc={displayText ? data.texte_de_la_carte : undefined}
-        enlargeLink
-        linkProps={{ href: `/${data.nom_de_page}` }}
-        endDetail='Découvrir la ressource'
-      />
+      <div className='fr-col-md-6 fr-col-12'>
+        <Card
+          className='fr-mb-2w'
+          start={
+            <Tag className='fr-mb-1w fr-tag--blue-france fr-text--capitalize' small>
+              {data.type}
+            </Tag>
+          }
+          title={data.titre_de_la_carte}
+          desc={displayText ? data.texte_de_la_carte : undefined}
+          enlargeLink
+          linkProps={{ href: `/${data.nom_de_page}` }}
+          endDetail='Découvrir la ressource'
+        />
+      </div>
     )}
   </>
 );
