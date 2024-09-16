@@ -184,6 +184,7 @@ export const Footer = () => {
         }
         homeLinkProps={{ href: '/', title: 'Accueil - Société Numérique' }}
         accessibility='non compliant'
+        accessibilityLinkProps={{ href: 'accessibilite' }}
         contentDescription='Le Programme Société Numérique de l’Agence Nationale de la Cohésion des Territoires œuvre en faveur d’un numérique d’intérêt général en offrant à tous et toutes les clés d’appropriation du numérique.'
         operatorLogo={{
           alt: 'Programme Société Numérique',
