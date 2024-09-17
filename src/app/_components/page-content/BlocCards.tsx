@@ -206,13 +206,15 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
 
   return (
     <>
-      <div className='flexrow-container'>
-        <div className='grid3'>
+      <div className='fr-mb-4w'>
+        <div className='fr-grid-row fr-grid-row--gutters'>
           {/* breves */}
           {articleType == 'breve' &&
             subArticles[cursor - 1] &&
             subArticles[cursor - 1].map((article) => (
-              <VerticalCard key={article.titre_de_la_carte} data={article as unknown as CardData} rows={0} />
+              <div key={article.titre_de_la_carte} className='fr-col-4'>
+                <VerticalCard data={article as unknown as CardData} rows={0} />
+              </div>
             ))}
         </div>
       </div>
@@ -223,15 +225,15 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
         subArticles[cursor - 1].map((article) => <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />)}
       {/* rapports de recherches */}
       {articleType == 'etude' && subArticles[cursor - 1] && (
-        <div className='fr-grid-row fr-grid-row--gutters'>
+        <div className='fr-grid-row fr-grid-row--gutters fr-my-2w'>
           {subArticles[cursor - 1].map((article) => (
             <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />
           ))}
         </div>
       )}
 
-      <div className='flexrow-container'>
-        <nav role='navigation' className='fr-pagination' aria-label='Pagination'>
+      <div className='fr-flex'>
+        <nav role='navigation' className='fr-pagination fr-mx-auto' aria-label='Pagination'>
           <ul className='fr-pagination__list'>{pagination}</ul>
         </nav>
       </div>

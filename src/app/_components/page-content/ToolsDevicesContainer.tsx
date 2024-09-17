@@ -69,7 +69,7 @@ export const ToolsDevicesContainer: React.FC<ToolsDevicesContainerProps> = ({ da
   return (
     <>
       {localData && (
-        <div className='flexrow-container'>
+        <div className='tools-devices-container'>
           <div className='grid3'>
             {localData.map((item) => (
               <div key={item.id}>

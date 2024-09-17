@@ -26,23 +26,25 @@ export const BlocFields = ({ data }: BlocFieldsProps) => {
   const marginBottomValue = marginsBottom[data.espacement_bas] || '0px';
 
   return (
-    <div className='flexrow-container'>
-      <div className='champ-de-blocs' style={{ marginBottom: marginBottomValue }}>
+    <div className='bloc-fields'>
+      <div className='champ-de-blocs fr-mb-4w fr-p-6w' style={{ marginBottom: marginBottomValue }}>
         <h3 style={{ marginBottom: '44px' }}>{data.titre}</h3>
-        <div className='grid2' style={{ marginBottom: '8px' }}>
+        <div className='fr-grid-row fr-grid-row--gutters '>
           {data.Bloc_simple.map((b) => (
-            <div key={b.id} className='bloc-simple'>
-              {b.page_cible ? (
-                <Link href={b.page_cible} target={b.page_cible && b.page_cible.includes('https://') ? '_blank' : undefined}>
-                  <span className='blue-text'>{b.texte_en_valeur} </span>
-                  {b.texte}
-                </Link>
-              ) : (
-                <>
-                  <span className='blue-text'>{b.texte_en_valeur} </span>
-                  {b.texte}
-                </>
-              )}
+            <div key={b.id} className='fr-col-md-6 fr-col-12'>
+              <div className='bloc-simple'>
+                {b.page_cible ? (
+                  <Link href={b.page_cible} target={b.page_cible && b.page_cible.includes('https://') ? '_blank' : undefined}>
+                    <span className='blue-text'>{b.texte_en_valeur} </span>
+                    {b.texte}
+                  </Link>
+                ) : (
+                  <>
+                    <span className='blue-text'>{b.texte_en_valeur} </span>
+                    {b.texte}
+                  </>
+                )}
+              </div>
             </div>
           ))}
         </div>
