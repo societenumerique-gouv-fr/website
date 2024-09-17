@@ -95,7 +95,7 @@ export const PageBuilder = ({
                 case 'flux-de-publications':
                   return (
                     <div key={e.id} style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
-                      <div className='grid2'>
+                      <div className='fr-flex fr-flex-gap-6v'>
                         {dataArticles &&
                           dataArticles.map((flux) => {
                             return (
@@ -113,11 +113,11 @@ export const PageBuilder = ({
                   );
                 case 'flux-actualite':
                   return (
-                    <div className='flexrow-container' style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
-                      <div className='grid3'>
+                    <div className='flux-actualite' style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
+                      <div className='fr-flex fr-flex-gap-6v'>
                         {dataArticles &&
-                          dataArticles.map(({ attributes }) => {
-                            return <VerticalCard key={attributes.titre_de_la_carte} data={attributes} rows={3} />;
+                          dataArticles.map((dataArticle) => {
+                            return <VerticalCard key={dataArticle.id} data={dataArticle} rows={3} />;
                           })}
                       </div>
                     </div>

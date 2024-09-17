@@ -13,7 +13,7 @@ type ImageData = {
 
 export type CardData = {
   id: string;
-  type: 'carte-verticale' | 'breve';
+  type: 'carte-verticale' | 'breve' | 'etude';
   espacement_bas: keyof typeof marginsBottom;
   label?: 'Evènement' | string;
   nom_de_page?: string;
@@ -53,7 +53,8 @@ export const VerticalCard = ({ data, rows, height, width, fontsizeLabel, text }:
           }}>
           <div className='fr-card__body card-img'>
             <div className='fr-card__content'>
-              <p className={data.label === 'Evènement' ? 'fr-tag jaune' : 'fr-tag rose'}>{data.label}</p>
+              {data.label && <p className={data.label === 'Evènement' ? 'fr-tag jaune' : 'fr-tag rose'}>{data.label}</p>}
+              {data.type === 'etude' && <p className='fr-tag rose'>Étude</p>}
               <h3 className='fr-card__title mt1'>
                 <Link href={`/${data.nom_de_page}`} className='grey-75'>
                   {data.titre_de_la_carte}
