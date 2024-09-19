@@ -30,7 +30,7 @@ const Page = async ({ params: { slug } }: { params: { slug: string[] } }) => {
       <main id={contentId}>
         <PageBuilder
           data={page.Composants}
-          dataArticles={[...breves.data].sort(byPubicationDate).slice(0, 3)}
+          breves={[...breves.data].sort(byPubicationDate).slice(0, 3)}
           isHome={false}
           navbarNavigationItems={navigationItems.data}
         />

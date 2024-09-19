@@ -23,7 +23,7 @@ const EtudesPage = async () => {
       <main id={contentId}>
         <PageBuilder
           data={page.Composants}
-          dataArticles={etudes.data.sort(byPubicationDate) ?? []}
+          rapportsDeRecherches={etudes.data.sort(byPubicationDate) ?? []}
           isHome={false}
           breadCrumbItems={[
             {

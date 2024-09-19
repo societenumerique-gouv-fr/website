@@ -18,11 +18,11 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
   <>
     {data.type == 'carte-horizontale' && (
       <div
-        className={`${rows === 1 ? `fr-grid-row fr-grid-row--gutters ${marginsBottom[data.espacement_bas]}` : `fr-col-md-${12 / rows} fr-col ${marginsBottom[data.espacement_bas]}}`}`}
+        className={`${rows === 1 ? `fr-grid-row fr-grid-row--gutters ${marginsBottom[data.espacement_bas]}` : `fr-col-md-${12 / rows} fr-col-12 ${marginsBottom[data.espacement_bas]}}`}`}
         style={{ marginBottom: marginsBottom[data.espacement_bas] }}>
         <div
           className={[
-            `${rows === 1 ? 'fr-col-md-6' : `fr-h-100`}`,
+            `${rows === 1 ? 'fr-col-md-6 fr-col-12' : `fr-h-100`}`,
             data.position === 'Centre' ? 'fr-mx-auto' : undefined,
             data.position === 'Gauche' ? 'fr-mr-auto' : undefined,
             data.position === 'Droite' ? 'fr-ms-auto' : undefined
@@ -69,21 +69,19 @@ export const HorizontalCard = ({ data, rows, displayText = true }) => (
     )}
 
     {data.type != 'carte-horizontale' && (
-      <div className='fr-col-md-6 fr-col-12'>
-        <Card
-          className='fr-mb-2w'
-          start={
-            <Tag className='fr-mb-1w fr-tag--blue-france fr-text--capitalize' small>
-              {data.type}
-            </Tag>
-          }
-          title={data.titre_de_la_carte}
-          desc={displayText ? data.texte_de_la_carte : undefined}
-          enlargeLink
-          linkProps={{ href: `/${data.nom_de_page}` }}
-          endDetail='Découvrir la ressource'
-        />
-      </div>
+      <Card
+        className='fr-mb-2w'
+        start={
+          <Tag className='fr-mb-1w fr-tag--blue-france fr-text--capitalize' small>
+            {data.type}
+          </Tag>
+        }
+        title={data.titre_de_la_carte}
+        desc={displayText ? data.texte_de_la_carte : undefined}
+        enlargeLink
+        linkProps={{ href: `/${data.nom_de_page}` }}
+        endDetail='Découvrir la ressource'
+      />
     )}
   </>
 );

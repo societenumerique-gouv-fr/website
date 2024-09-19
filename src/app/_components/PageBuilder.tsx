@@ -33,7 +33,8 @@ import { ToolsDevicesContainer } from './page-content/ToolsDevicesContainer';
 
 export const PageBuilder = ({
   data,
-  dataArticles,
+  breves = [],
+  rapportsDeRecherches = [],
   navbarNavigationItems,
   breadCrumbItems = [],
   dataToolsDevices = null,
@@ -41,7 +42,8 @@ export const PageBuilder = ({
   isHome
 }: {
   data: unknown[];
-  dataArticles: (BreveResource | RapportDeRechercheResource)[];
+  breves?: BreveResource[];
+  rapportsDeRecherches?: RapportDeRechercheResource[];
   navbarNavigationItems?: NavbarNavigationItems;
   breadCrumbItems?: BreadcrumbItem[];
   slug?: string;
@@ -94,32 +96,30 @@ export const PageBuilder = ({
                   return <HorizontalCard data={e} rows={1} />;
                 case 'flux-de-publications':
                   return (
-                    <div key={e.id} style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
-                      <div className='fr-flex fr-flex-gap-6v'>
-                        {dataArticles &&
-                          dataArticles.map((flux) => {
-                            return (
-                              <HorizontalCard
-                                key={flux.titre_de_la_carte}
-                                data={flux}
-                                rows={2}
-                                displayText={false}
-                                fluxTwo={true}
-                              />
-                            );
-                          })}
-                      </div>
+                    <div className='fr-grid-row fr-grid-row--gutters' style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
+                      {rapportsDeRecherches &&
+                        rapportsDeRecherches.slice(0, 2).map((rapportDeRecherche) => (
+                          <div key={rapportDeRecherche.id} className='fr-col-md-6 fr-col-12'>
+                            <HorizontalCard
+                              key={rapportDeRecherche.titre_de_la_carte}
+                              data={rapportDeRecherche}
+                              rows={2}
+                              displayText={false}
+                              fluxTwo={true}
+                            />
+                          </div>
+                        ))}
                     </div>
                   );
                 case 'flux-actualite':
                   return (
-                    <div className='flux-actualite' style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
-                      <div className='fr-flex fr-flex-gap-6v'>
-                        {dataArticles &&
-                          dataArticles.map((dataArticle) => {
-                            return <VerticalCard key={dataArticle.id} data={dataArticle} rows={3} />;
-                          })}
-                      </div>
+                    <div className='fr-grid-row fr-grid-row--gutters' style={{ marginBottom: marginsBottom[e.espacement_bas] }}>
+                      {breves &&
+                        breves.slice(0, 2).map((breve) => (
+                          <div key={breve.id} className='fr-col-md-6 fr-col-12'>
+                            <VerticalCard data={breve} rows={3} />
+                          </div>
+                        ))}
                     </div>
                   );
                 case 'champ-de-blocs':
@@ -127,11 +127,11 @@ export const PageBuilder = ({
                 case 'ancre':
                   return <div className='translate-header-margin' id={e.ancre} />;
                 case 'bloc-de-breves':
-                  return <BlocCards articles={dataArticles.map(({ attributes }) => attributes)} type='breve' />;
+                  return <BlocCards articles={breves.map(({ attributes }) => attributes)} type='breve' />;
                 case 'bloc-de-publications-strategiques':
                   return <BlocCards articles={strategiques} type='rapport-strategique' />;
                 case 'bloc-de-rapports-de-recherches':
-                  return <BlocCards articles={dataArticles.map(({ attributes }) => attributes)} type='etude' />;
+                  return <BlocCards articles={rapportsDeRecherches.map(({ attributes }) => attributes)} type='etude' />;
                 case 'citation':
                   return <Quote data={e} />;
                 case 'mise-en-avant':
