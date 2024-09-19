@@ -212,7 +212,7 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
           {articleType == 'breve' &&
             subArticles[cursor - 1] &&
             subArticles[cursor - 1].map((article) => (
-              <div key={article.titre_de_la_carte} className='fr-col-4'>
+              <div key={article.titre_de_la_carte} className='fr-col-lg-4 fr-col-md-6 fr-col-12'>
                 <VerticalCard data={article as unknown as CardData} rows={0} />
               </div>
             ))}
@@ -227,7 +227,9 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
       {articleType == 'etude' && subArticles[cursor - 1] && (
         <div className='fr-grid-row fr-grid-row--gutters fr-my-2w'>
           {subArticles[cursor - 1].map((article) => (
-            <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />
+            <div key={article.titre_de_la_carte} className='fr-col-lg-6 fr-col-12'>
+              <HorizontalCard key={article.titre_de_la_carte} data={article} rows={1} />
+            </div>
           ))}
         </div>
       )}

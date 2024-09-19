@@ -23,7 +23,7 @@ const BrevesPage = async () => {
       <main id={contentId}>
         <PageBuilder
           data={page.Composants}
-          dataArticles={breves.data.sort(byPubicationDate) ?? []}
+          breves={breves.data.sort(byPubicationDate) ?? []}
           isHome={false}
           breadCrumbItems={[
             {

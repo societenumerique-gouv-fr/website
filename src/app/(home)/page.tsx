@@ -34,11 +34,9 @@ const HomePage = async () => {
       <main id={contentId}>
         <PageBuilder
           data={page.Composants}
-          dataArticles={
-            [...rapportsDeRecherches.data, ...breves.data].sort(byPubicationDate).slice(0, 2).map(toAttributes) as unknown as (
-              | BreveResource
-              | RapportDeRechercheResource
-            )[]
+          breves={breves.data.sort(byPubicationDate).map(toAttributes) as unknown as BreveResource[]}
+          rapportsDeRecherches={
+            rapportsDeRecherches.data.sort(byPubicationDate).map(toAttributes) as unknown as RapportDeRechercheResource[]
           }
           isHome={true}
         />

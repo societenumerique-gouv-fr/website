@@ -24,7 +24,6 @@ const BrevePage = async ({ params: { slug } }: { params: { slug: string } }) => 
       <main id={contentId}>
         <PageBuilder
           data={breve.composants}
-          dataArticles={[]}
           isHome={false}
           breadCrumbItems={[
             {

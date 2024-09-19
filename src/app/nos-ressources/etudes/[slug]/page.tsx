@@ -24,7 +24,6 @@ const EtudesPage = async ({ params: { slug } }: { params: { slug: string } }) =>
       <main id={contentId}>
         <PageBuilder
           data={etude.composants}
-          dataArticles={[]}
           isHome={false}
           breadCrumbItems={[
             {

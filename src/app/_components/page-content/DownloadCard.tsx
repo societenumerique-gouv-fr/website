@@ -50,7 +50,7 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
       className={[
         rows === 1
           ? `fr-grid-row fr-grid-row--gutters ${marginsBottom[data.espacement_bas]} fr-col-md-6`
-          : `fr-col-md-${12 / rows} fr-col ${marginsBottom[data.espacement_bas]}}`,
+          : `fr-col-md-${12 / rows} fr-col-12 ${marginsBottom[data.espacement_bas]}}`,
         data.position === 'Centre' ? 'fr-mx-auto' : undefined,
         data.position === 'Gauche' ? 'fr-mr-auto' : undefined,
         data.position === 'Droite' ? 'fr-ms-auto' : undefined
