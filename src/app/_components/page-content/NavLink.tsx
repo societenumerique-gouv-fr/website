@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { marginsBottom, position } from '../structs';
 
 type LinkData = {
@@ -43,11 +43,15 @@ export const NavLink: React.FC<NavLinkProps> = ({ data, rows }) => {
         <div
           key={linkData.id}
           className={`${position[linkData.position] === 'left' || position[linkData.position] === 'right' ? position[linkData.position] : 'center'}`}
-          style={{ marginBottom: marginsBottom[data.espacement_bas] ?? undefined }}>
+          style={{
+            marginBottom: marginsBottom[data.espacement_bas] ?? undefined
+          }}
+        >
           <Link
             href={linkData.page_cible}
             className={`${size}`}
-            target={linkData.page_cible && linkData.page_cible.includes('https://') ? '_blank' : undefined}>
+            target={linkData.page_cible && linkData.page_cible.includes('https://') ? '_blank' : undefined}
+          >
             {linkData.texte}
           </Link>
         </div>
@@ -57,7 +61,8 @@ export const NavLink: React.FC<NavLinkProps> = ({ data, rows }) => {
           <Link
             href={linkData.page_cible}
             className={`${size}`}
-            target={linkData.page_cible && linkData.page_cible.includes('https://') ? '_blank' : undefined}>
+            target={linkData.page_cible && linkData.page_cible.includes('https://') ? '_blank' : undefined}
+          >
             {linkData.texte}
           </Link>
         </div>

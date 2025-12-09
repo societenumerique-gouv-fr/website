@@ -1,4 +1,4 @@
-import { NavbarNavigationItem } from './navigation-item';
+import type { NavbarNavigationItem } from './navigation-item';
 
 export type NavbarLink = {
   __component: 'composants.lien';

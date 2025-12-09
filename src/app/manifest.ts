@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import path from 'path';
 
 const iconsDirectory = path.join(process.cwd(), 'public/favicons');

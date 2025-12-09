@@ -1,5 +1,5 @@
-import { FrIconClassName } from '@codegouvfr/react-dsfr';
-import { HeaderProps } from '@codegouvfr/react-dsfr/Header';
+import type { FrIconClassName } from '@codegouvfr/react-dsfr';
+import type { HeaderProps } from '@codegouvfr/react-dsfr/Header';
 
 export type LienHeader = {
   titre_du_lien: string;

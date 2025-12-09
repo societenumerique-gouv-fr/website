@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
+import { getBreves } from '@/api/breves';
+import { getPageAccueil, getPageAccueilContent, pageNameOf } from '@/api/page-accueil';
+import { toSinglePage } from '@/api/pages';
+import { getRapportsDeRecherches } from '@/api/rapports-de-recherches';
 import { PageBuilder } from '@/app/_components/PageBuilder';
 import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
+import type { BreveResource } from '@/ressources/breve-resource';
 import { byPubicationDate, toAttributes } from '@/ressources/collection-operations';
-import { getPageAccueil, getPageAccueilContent, pageNameOf } from '@/api/page-accueil';
-import { getBreves } from '@/api/breves';
-import { toSinglePage } from '@/api/pages';
-import { getRapportsDeRecherches } from '@/api/rapports-de-recherches';
+import type { RapportDeRechercheResource } from '@/ressources/rapport-de-recherche-resource';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
-import { BreveResource } from '@/ressources/breve-resource';
-import { RapportDeRechercheResource } from '@/ressources/rapport-de-recherche-resource';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;

@@ -37,7 +37,11 @@ export const Quote = ({ data }: QuoteProps) => {
   return (
     <figure
       className={`${position} fr-quote fr-quote--column margin-quote`}
-      style={{ maxWidth: !imageUrl ? '1000px' : '840px', marginBottom: marginsBottom[data.espacement_bas] || '0px' }}>
+      style={{
+        maxWidth: !imageUrl ? '1000px' : '840px',
+        marginBottom: marginsBottom[data.espacement_bas] || '0px'
+      }}
+    >
       <blockquote cite=''>
         {imageUrl && (
           <div className='fr-quote__image'>

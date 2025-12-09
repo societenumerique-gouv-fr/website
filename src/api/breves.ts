@@ -1,4 +1,4 @@
-import { BreveResource } from '@/ressources/breve-resource';
+import type { BreveResource } from '@/ressources/breve-resource';
 import { fetchToJson } from './fetch-to-json';
 
 export const getBreves = async (): Promise<{ data: BreveResource[] }> =>

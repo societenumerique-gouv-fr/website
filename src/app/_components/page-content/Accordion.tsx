@@ -30,7 +30,8 @@ export const Accordion = ({ data, rows }: AccordionProps) => {
           className='mb2'
           style={{
             marginBottom: marginsBottom[accordionData.espacement_bas] ?? undefined // Fallback to undefined if null
-          }}>
+          }}
+        >
           <section className='fr-accordion fr-col-lg-8' style={{ marginLeft: 'auto', marginRight: 'auto' }}>
             <h3 className='fr-accordion__title'>
               <button className='fr-accordion__btn' aria-expanded='false' aria-controls={`accordion-${accordionData.id}`}>

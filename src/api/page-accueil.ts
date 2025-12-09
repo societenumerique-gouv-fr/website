@@ -1,5 +1,5 @@
-import { PageAccueil } from '@/ressources/page-accueil';
-import { PageResource } from '@/ressources/page-resource';
+import type { PageAccueil } from '@/ressources/page-accueil';
+import type { PageResource } from '@/ressources/page-resource';
 import { fetchToJson } from './fetch-to-json';
 
 export const getPageAccueil = async (): Promise<{ data: PageAccueil }> =>

@@ -1,4 +1,4 @@
-import { PageResource } from '../ressources/page-resource';
+import type { PageResource } from '../ressources/page-resource';
 
 export const getPages = async (): Promise<{ data: PageResource[] }> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/pages?pagination[pageSize]=100`);

@@ -47,11 +47,20 @@ export const BannerTitle = ({ data }: BannerTitleProps) => {
           textUnderlineOffset: '0.50em',
           textDecorationThickness: '4px',
           paddingTop: '3rem'
-        }}>
+        }}
+      >
         {data.titre}
       </h2>
       <div className='inline'>
-        <p style={{ maxWidth: '550px', margin: '0 auto', fontSize: '20px', lineHeight: '1.3', paddingTop: '1rem' }}>
+        <p
+          style={{
+            maxWidth: '550px',
+            margin: '0 auto',
+            fontSize: '20px',
+            lineHeight: '1.3',
+            paddingTop: '1rem'
+          }}
+        >
           {data.texte}
         </p>
         {imageUrl && (

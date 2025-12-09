@@ -50,7 +50,8 @@ export const VerticalCard = ({ data, rows, height, width, fontsizeLabel, text }:
           style={{
             height: '430px',
             marginBottom: marginsBottom[data.espacement_bas] || '0px'
-          }}>
+          }}
+        >
           <div className='fr-card__body card-img'>
             <div className='fr-card__content'>
               {data.label && <p className={data.label === 'Evènement' ? 'fr-tag jaune' : 'fr-tag rose'}>{data.label}</p>}
@@ -78,21 +79,24 @@ export const VerticalCard = ({ data, rows, height, width, fontsizeLabel, text }:
           display: 'flex',
           justifyContent: rows > 1 ? 'center' : data.position === 'Centre' ? 'center' : '',
           marginBottom: marginsBottom[data.espacement_bas] || '0px'
-        }}>
+        }}
+      >
         <div className='fr-card fr-enlarge-link'>
           <div
             className='fr-card__body card-img mb3'
             style={{
               height: height && rows === 1 ? height : '',
               width: width && rows === 1 ? width : ''
-            }}>
+            }}
+          >
             <div
               className='fr-card__content'
               style={{
                 paddingLeft: '16px',
                 paddingRight: '16px',
                 paddingTop: '0px'
-              }}>
+              }}
+            >
               <div>
                 {data.labels.length > 0 &&
                   data.labels.map((label) => (
@@ -102,7 +106,8 @@ export const VerticalCard = ({ data, rows, height, width, fontsizeLabel, text }:
                       style={{
                         fontSize: fontsizeLabel,
                         color: 'rgb(0,0,185)'
-                      }}>
+                      }}
+                    >
                       {label.titre_du_label}
                     </span>
                   ))}
@@ -111,7 +116,8 @@ export const VerticalCard = ({ data, rows, height, width, fontsizeLabel, text }:
                 <Link
                   href={data.lien}
                   target={data.lien.includes('https://') ? '_blank' : undefined}
-                  style={{ color: '#000091' }}>
+                  style={{ color: '#000091' }}
+                >
                   {data.titre_du_lien}
                 </Link>
               </h4>

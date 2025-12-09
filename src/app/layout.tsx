@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
-import type { Metadata } from 'next';
 import Notice from '@codegouvfr/react-dsfr/Notice';
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import { fetchData } from '@/functions/fetcher';
-import { NavbarNavigationItems } from '@/presenters/navbar/navigation-item';
-import { NavbarHeader } from '@/presenters/navbar/header';
+import type { NavbarHeader } from '@/presenters/navbar/header';
+import type { NavbarNavigationItems } from '@/presenters/navbar/navigation-item';
 import { ActiveHeader } from './_components/ActiveHeader';
-import { ScrollToTop } from './_components/ScrollToTop';
 import { Footer } from './_components/Footer';
+import { ScrollToTop } from './_components/ScrollToTop';
 import { Dsfr } from './Dsfr';
 import { PreloadResources } from './PreloadResources';
 import './globals.scss';

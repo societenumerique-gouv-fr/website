@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
 import type { SideMenuProps } from '@codegouvfr/react-dsfr/SideMenu';
+import { useEffect, useMemo, useState } from 'react';
 
 export const isBrowser = typeof document !== 'undefined';
 
@@ -61,7 +61,6 @@ export const useNavigationSideMenu = ({
             visibleElements.set(entryChange.target.id, entryChange.isIntersecting);
           }
 
-          // @ts-expect-error can iterate on set entries
           for (const [id, isVisible] of visibleElements.entries()) {
             if (isVisible) {
               setActiveId(id);

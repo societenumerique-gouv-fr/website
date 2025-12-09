@@ -1,7 +1,7 @@
-import { MainNavigationProps } from '@codegouvfr/react-dsfr/MainNavigation';
-import { isNavbarLink, NavbarLink, toNavbarLink } from './navbar-link';
-import { isNavbarMegaMenu, NavbarMegaMenu, toNavbarMegaMenu } from './navbar-mega-menu';
-import { isNavbarMenuDeroulant, NavbarMenuDeroulant, toNavbarMenuDeroulant } from './navbar-menu-deroulant';
+import type { MainNavigationProps } from '@codegouvfr/react-dsfr/MainNavigation';
+import { isNavbarLink, type NavbarLink, toNavbarLink } from './navbar-link';
+import { isNavbarMegaMenu, type NavbarMegaMenu, toNavbarMegaMenu } from './navbar-mega-menu';
+import { isNavbarMenuDeroulant, type NavbarMenuDeroulant, toNavbarMenuDeroulant } from './navbar-menu-deroulant';
 
 export type BreadcrumbItem = {
   label: string;
@@ -52,7 +52,14 @@ export const toBreadcrumbItems =
             ? breadcrumbItems
             : [
                 ...breadcrumbItems,
-                ...(pathArray.length > 1 ? [{ label: navigationItem.titre_du_menu, href: `/${pathArray[0]}` }] : []),
+                ...(pathArray.length > 1
+                  ? [
+                      {
+                        label: navigationItem.titre_du_menu,
+                        href: `/${pathArray[0]}`
+                      }
+                    ]
+                  : []),
                 { label: lien.titre_du_lien }
               ];
         }

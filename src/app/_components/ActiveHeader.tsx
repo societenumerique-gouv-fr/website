@@ -1,9 +1,9 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { Header } from '@codegouvfr/react-dsfr/Header/Header';
-import { NavbarHeader, toQuickAccessItems } from '@/presenters/navbar/header';
-import { NavbarNavigationItems, toNavigation } from '@/presenters/navbar/navigation-item';
+import { usePathname } from 'next/navigation';
+import { type NavbarHeader, toQuickAccessItems } from '@/presenters/navbar/header';
+import { type NavbarNavigationItems, toNavigation } from '@/presenters/navbar/navigation-item';
 
 export const ActiveHeader = ({
   header,

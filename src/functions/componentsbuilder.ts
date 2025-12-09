@@ -33,7 +33,12 @@ export const buildSections = (array) => {
         temp.push(array[i]);
         i++;
       }
-      resp.push({ rows: rowsCount, elements: temp, sectionId: el.id, espacement_bas: espacement_bas });
+      resp.push({
+        rows: rowsCount,
+        elements: temp,
+        sectionId: el.id,
+        espacement_bas: espacement_bas
+      });
     }
   });
 

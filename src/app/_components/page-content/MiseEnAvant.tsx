@@ -27,7 +27,14 @@ export const MiseEnAvant = ({ data }: MiseEnAvantProps) => {
   return (
     <div className={`fr-callout`} style={{ marginTop: '32px', marginBottom: marginBottomValue }}>
       {data.afficher_pictogramme && data.pictogramme_remixicon && (
-        <div style={{ width: '25px', position: 'absolute', top: '16px', left: '16px' }}>
+        <div
+          style={{
+            width: '25px',
+            position: 'absolute',
+            top: '16px',
+            left: '16px'
+          }}
+        >
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
             <path d={giveMePath(data.pictogramme_remixicon)}></path>
           </svg>
@@ -39,7 +46,8 @@ export const MiseEnAvant = ({ data }: MiseEnAvantProps) => {
         <Link
           href={data.lien_du_bouton}
           target={data.lien_du_bouton.includes('https://') ? '_blank' : undefined}
-          className='fr-btn'>
+          className='fr-btn'
+        >
           {data.titre_du_bouton}
         </Link>
       )}

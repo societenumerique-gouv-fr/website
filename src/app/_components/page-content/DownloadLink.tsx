@@ -30,7 +30,8 @@ export const DownloadLink = ({ data, rows }: DownloadLinkProps) => {
           style={{
             display: 'flex',
             justifyContent: data.position === 'Centre' ? 'center' : data.position === 'Gauche' ? 'flex-start' : 'flex-end'
-          }}>
+          }}
+        >
           {data.Lien_telechargement && data.Lien_telechargement.length > 1 && (
             <div className='download-container' style={{ marginBottom: marginBottomValue }}>
               {data.titre_de_la_liste && <h4>{data.titre_de_la_liste}</h4>}
@@ -44,7 +45,8 @@ export const DownloadLink = ({ data, rows }: DownloadLinkProps) => {
                       hrefLang='fr'
                       download
                       target='_blank'
-                      id={`link-${index}`}>
+                      id={`link-${index}`}
+                    >
                       {lien.texte_du_lien}
                       <span className='fr-link__detail'></span>
                     </a>
@@ -60,7 +62,8 @@ export const DownloadLink = ({ data, rows }: DownloadLinkProps) => {
                 target='_blank'
                 id={`link-${data.id}`}
                 href={data.Lien_telechargement[0].media_a_telecharger.data?.attributes.url}
-                download={data.Lien_telechargement[0].media_a_telecharger.data?.attributes.name}>
+                download={data.Lien_telechargement[0].media_a_telecharger.data?.attributes.name}
+              >
                 {data.Lien_telechargement[0].texte_du_lien}
                 <span className='fr-link__detail'></span>
               </a>
@@ -82,7 +85,8 @@ export const DownloadLink = ({ data, rows }: DownloadLinkProps) => {
                       hrefLang='fr'
                       download={lien.media_a_telecharger.data?.attributes.name}
                       id={`link-${index}`}
-                      href={lien.media_a_telecharger.data !== null ? lien.media_a_telecharger.data.attributes.url : undefined}>
+                      href={lien.media_a_telecharger.data !== null ? lien.media_a_telecharger.data.attributes.url : undefined}
+                    >
                       {lien.texte_du_lien}
                       <span className='fr-link__detail'></span>
                     </a>
@@ -103,7 +107,8 @@ export const DownloadLink = ({ data, rows }: DownloadLinkProps) => {
                   data.Lien_telechargement[0].media_a_telecharger.data !== null
                     ? data.Lien_telechargement[0].media_a_telecharger.data.attributes.url
                     : undefined
-                }>
+                }
+              >
                 {data.Lien_telechargement[0].texte_du_lien}
                 <span className='fr-link__detail'></span>
               </a>

@@ -1,5 +1,5 @@
-import { isExternalLink, NavbarLink } from './navbar-link';
-import { NavbarNavigationItem } from './navigation-item';
+import { isExternalLink, type NavbarLink } from './navbar-link';
+import type { NavbarNavigationItem } from './navigation-item';
 
 export type NavbarMenuDeroulant = {
   __component: 'composants.deroulant-navbar';
@@ -12,7 +12,10 @@ export const isNavbarMenuDeroulant = (navigationItem: NavbarNavigationItem): nav
 
 export const toNavbarMenuDeroulant = (pathname: string) => (navigationItem: NavbarMenuDeroulant) => ({
   menuLinks: navigationItem.liens.map((lien: NavbarLink) => ({
-    linkProps: { href: lien.page_cible, target: isExternalLink(lien.page_cible) ? '_blank' : '_self' },
+    linkProps: {
+      href: lien.page_cible,
+      target: isExternalLink(lien.page_cible) ? '_blank' : '_self'
+    },
     text: lien.titre_du_lien,
     isActive: pathname.endsWith(lien.page_cible)
   })),

@@ -168,7 +168,7 @@
 }
 
 .fr-card {
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .mt1.title-horizontal {
@@ -188,7 +188,7 @@
 .textarea {
   margin-top: 32px;
   margin-bottom: 32px;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   max-width: 1100px;
   word-break: break-all;
 }
