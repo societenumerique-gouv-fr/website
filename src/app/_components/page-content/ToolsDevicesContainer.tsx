@@ -85,7 +85,8 @@ export const ToolsDevicesContainer: React.FC<ToolsDevicesContainerProps> = ({ da
                             .normalize('NFD')
                             .replace(/[\u0300-\u036f]/g, '')}`}
                           className='grey-75'
-                          style={{ fontSize: '20px' }}>
+                          style={{ fontSize: '20px' }}
+                        >
                           {item.attributes.titre_de_la_carte}
                         </Link>
                       </h3>
@@ -95,14 +96,27 @@ export const ToolsDevicesContainer: React.FC<ToolsDevicesContainerProps> = ({ da
                           : item.attributes.texte_de_la_carte}
                       </p>
                     </div>
-                    <p style={{ position: 'absolute', bottom: '0', fontSize: '12px', color: '#666666' }}>
+                    <p
+                      style={{
+                        position: 'absolute',
+                        bottom: '0',
+                        fontSize: '12px',
+                        color: '#666666'
+                      }}
+                    >
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         viewBox='0 0 24 24'
-                        style={{ width: '16px', position: 'absolute', bottom: '5px' }}>
+                        style={{
+                          width: '16px',
+                          position: 'absolute',
+                          bottom: '5px'
+                        }}
+                      >
                         <path
                           d='M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z'
-                          fill='rgb(102,102,102)'></path>
+                          fill='rgb(102,102,102)'
+                        ></path>
                       </svg>
                       <span style={{ marginLeft: '20px' }}>Découvrir {type === 'Outil' ? " l'outil" : 'le dispositif'}</span>
                     </p>

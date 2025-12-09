@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchData } from '@/functions/fetcher';
 
 type Colors = {
@@ -43,7 +43,8 @@ export const Banner = () => {
       style={{
         backgroundImage: `url(${imageUrl})`,
         marginBottom: '32px'
-      }}>
+      }}
+    >
       {titleSize === 'h1' && (
         <h1 className='banner-title' style={{ color: titleColor ? colors[titleColor] : undefined }}>
           {title}

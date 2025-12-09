@@ -1,9 +1,13 @@
 import { isExternalLink } from './navbar-link';
-import { NavbarNavigationItem } from './navigation-item';
+import type { NavbarNavigationItem } from './navigation-item';
 
 type Categorie = { titre_de_la_categorie: string; page_cible?: string };
 
-type Lien = { titre_de_la_categorie: string; titre_du_lien: string; page_cible: string };
+type Lien = {
+  titre_de_la_categorie: string;
+  titre_du_lien: string;
+  page_cible: string;
+};
 
 export type NavbarMegaMenu = {
   __component: 'composants.mega-menu-navbar';

@@ -1,5 +1,5 @@
-import { BreveResource } from './breve-resource';
-import { RapportDeRechercheResource } from './rapport-de-recherche-resource';
+import type { BreveResource } from './breve-resource';
+import type { RapportDeRechercheResource } from './rapport-de-recherche-resource';
 
 export const toAttributes = ({
   attributes

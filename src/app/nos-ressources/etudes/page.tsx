@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
-import { byPubicationDate } from '@/ressources/collection-operations';
+import type { Metadata } from 'next';
+import { getEtudes } from '@/api/etudes';
+import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
 import { PageBuilder } from '@/app/_components/PageBuilder';
 import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
-import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
-import { getEtudes } from '@/api/etudes';
+import { byPubicationDate } from '@/ressources/collection-operations';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
 export const metadata: Metadata = {

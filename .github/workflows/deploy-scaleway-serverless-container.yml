@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         id: prepare
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Login to Scaleway Website container registry
         id: login

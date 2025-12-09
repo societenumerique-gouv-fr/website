@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
+import { getBreves } from '@/api/breves';
+import { getNavigationItems } from '@/api/navigation-items';
+import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
 import { PageBuilder } from '@/app/_components/PageBuilder';
 import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
-import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
-import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
-import { getBreves } from '@/api/breves';
-import { getNavigationItems } from '@/api/navigation-items';
+import type { NavbarNavigationItems } from '@/presenters/navbar/navigation-item';
 import { byPubicationDate } from '@/ressources/collection-operations';
-import { NavbarNavigationItems } from '@/presenters/navbar/navigation-item';
+import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
-export const generateMetadata = async ({ params: { slug } }: { params: { slug: string[] } }): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> => {
+  const slug = (await params).slug;
   const page = toSinglePage(await getPagesMatchingSlug(slug));
 
   return {
@@ -17,7 +18,9 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
   };
 };
 
-const Page = async ({ params: { slug } }: { params: { slug: string[] } }) => {
+const Page = async ({ params }: { params: Promise<{ slug: string[] }> }) => {
+  const slug = (await params).slug;
+
   const navigationItems: { data: NavbarNavigationItems } = await getNavigationItems();
   const page = toSinglePage(await getPagesMatchingSlug(slug));
   const breves = await getBreves();

@@ -42,7 +42,8 @@ export const Media = ({ data }: MediaProps) => {
               className='fr-responsive-vid fr-ratio-4x3'
               src={data.lien_video.replace('watch?v=', 'embed/').replace(/&.+/, '')}
               allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-              allowFullScreen></iframe>
+              allowFullScreen
+            ></iframe>
             {data.description && <p className='fr-mt-2w'>{data.description}</p>}
           </div>
         ) : (
@@ -57,7 +58,8 @@ export const Media = ({ data }: MediaProps) => {
             <button
               className='fr-transcription__btn'
               aria-expanded={data.transcription_ouverte ? 'true' : 'false'}
-              aria-controls={`fr-transcription__collapse-transcription-${data.id}`}>
+              aria-controls={`fr-transcription__collapse-transcription-${data.id}`}
+            >
               Transcription
             </button>
             <div className='fr-collapse' id={`fr-transcription__collapse-transcription-${data.id}`}>
@@ -65,7 +67,8 @@ export const Media = ({ data }: MediaProps) => {
                 id='fr-transcription__modal-transcription-471'
                 className='fr-modal'
                 role='dialog'
-                aria-labelledby={`fr-transcription__modal-transcription-${data.id}-title`}>
+                aria-labelledby={`fr-transcription__modal-transcription-${data.id}-title`}
+              >
                 <div className='fr-container fr-container--fluid fr-container-md'>
                   <div className='fr-grid-row fr-grid-row--center'>
                     <div className='fr-col-12 fr-col-md-10 fr-col-lg-8'>
@@ -74,7 +77,8 @@ export const Media = ({ data }: MediaProps) => {
                           <button
                             className='fr-btn--close fr-btn'
                             aria-controls={`fr-transcription__modal-transcription-${data.id}`}
-                            title='Fermer'>
+                            title='Fermer'
+                          >
                             Fermer
                           </button>
                         </div>

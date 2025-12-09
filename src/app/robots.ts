@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 import { urlFromEnv } from '@/utils';
 
 const robots = (): MetadataRoute.Robots => ({

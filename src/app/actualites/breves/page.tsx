@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { getBreves } from '@/api/breves';
+import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
 import { PageBuilder } from '@/app/_components/PageBuilder';
 import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
 import { byPubicationDate } from '@/ressources/collection-operations';
-import { getBreves } from '@/api/breves';
-import { getPagesMatchingSlug, toSinglePage } from '@/api/pages';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
 export const metadata: Metadata = {

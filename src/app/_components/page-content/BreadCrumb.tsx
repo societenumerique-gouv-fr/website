@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BreadcrumbItem, NavbarNavigationItems, toBreadcrumbItems } from '@/presenters/navbar/navigation-item';
+import { type BreadcrumbItem, type NavbarNavigationItems, toBreadcrumbItems } from '@/presenters/navbar/navigation-item';
 
 export const BreadCrumb = ({
   navbarNavigationItems,
@@ -29,7 +29,7 @@ export const BreadCrumb = ({
               </li>
               {breadcrumbItems.map((breadcrumbItem) => {
                 return (
-                  <li key={breadcrumbItem.href}>
+                  <li key={breadcrumbItem.label}>
                     {breadcrumbItem.href ? (
                       <Link className='fr-breadcrumb__link' href={breadcrumbItem.href}>
                         {breadcrumbItem.label}

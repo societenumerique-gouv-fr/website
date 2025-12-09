@@ -55,10 +55,12 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
         data.position === 'Gauche' ? 'fr-mr-auto' : undefined,
         data.position === 'Droite' ? 'fr-ms-auto' : undefined
       ].join(' ')}
-      key={data.id}>
+      key={data.id}
+    >
       <div
         className='fr-card fr-enlarge-link fr-card--download fr-card--horizontal fr-card--horizontal-half mb2'
-        style={{ marginBottom: marginBottomValue }}>
+        style={{ marginBottom: marginBottomValue }}
+      >
         <div className='fr-card__body'>
           <div className='fr-card__content'>
             <h3 className='fr-card__title'>
@@ -69,7 +71,8 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
                     : data.telechargement_externe || '#'
                 }
                 target='_blank'
-                hrefLang='fr'>
+                hrefLang='fr'
+              >
                 {data.titre_de_la_carte}
               </a>
             </h3>
@@ -78,7 +81,13 @@ export const DownloadCard = ({ data, rows }: DownloadCardProps) => {
               <div className='fr-card__start'>
                 <span
                   className={`card-label ${colorClass}`}
-                  style={{ fontSize: '14px', display: 'block', marginTop: '0px', marginBottom: '16px' }}>
+                  style={{
+                    fontSize: '14px',
+                    display: 'block',
+                    marginTop: '0px',
+                    marginBottom: '16px'
+                  }}
+                >
                   {data.label.titre_du_label}
                 </span>
               </div>

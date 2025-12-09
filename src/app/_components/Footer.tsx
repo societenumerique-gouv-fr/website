@@ -1,8 +1,8 @@
 'use client';
 
 import { Footer as FooterDsfr } from '@codegouvfr/react-dsfr/Footer';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { fetchData } from '@/functions/fetcher';
 
 type FooterLink = {
@@ -78,7 +78,8 @@ export const Footer = () => {
                   <a
                     href={content.lien_du_bouton_abonnement ?? '#'}
                     className='fr-btn footer-left-button'
-                    title={content.texte_du_bouton_abonnement ?? ''}>
+                    title={content.texte_du_bouton_abonnement ?? ''}
+                  >
                     {content.texte_du_bouton_abonnement ?? "S'abonner"}
                   </a>
                 </div>
@@ -108,7 +109,8 @@ export const Footer = () => {
                         title='Facebook'
                         href={content.lien_facebook}
                         target='_blank'
-                        rel='noreferrer'>
+                        rel='noreferrer'
+                      >
                         facebook
                       </a>
                     </li>
@@ -120,7 +122,8 @@ export const Footer = () => {
                         title='Twitter'
                         href={content.lien_twitter}
                         target='_blank'
-                        rel='noreferrer'>
+                        rel='noreferrer'
+                      >
                         twitter
                       </a>
                     </li>
@@ -132,7 +135,8 @@ export const Footer = () => {
                         title='Instagram'
                         href={content.lien_instagram}
                         target='_blank'
-                        rel='noreferrer'>
+                        rel='noreferrer'
+                      >
                         instagram
                       </a>
                     </li>
@@ -144,7 +148,8 @@ export const Footer = () => {
                         title='LinkedIn'
                         href={content.lien_linkedin}
                         target='_blank'
-                        rel='noreferrer'>
+                        rel='noreferrer'
+                      >
                         linkedin
                       </a>
                     </li>
@@ -156,7 +161,8 @@ export const Footer = () => {
                         title='YouTube'
                         href={content.lien_youtube}
                         target='_blank'
-                        rel='noreferrer'>
+                        rel='noreferrer'
+                      >
                         youtube
                       </a>
                     </li>
@@ -196,7 +202,8 @@ export const Footer = () => {
             key={link.url}
             className='fr-footer__bottom-link'
             href={link.url}
-            target={link.url.startsWith('https') ? '_blank' : undefined}>
+            target={link.url.startsWith('https') ? '_blank' : undefined}
+          >
             {link.titre_du_lien}
           </Link>
         ))}

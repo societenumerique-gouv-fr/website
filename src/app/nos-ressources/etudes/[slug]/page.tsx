@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
+import { getEtudesMatchingSlug, toSingleEtude } from '@/api/etudes';
 import { PageBuilder } from '@/app/_components/PageBuilder';
 import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
-import { getEtudesMatchingSlug, toSingleEtude } from '@/api/etudes';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
 export const generateMetadata = async ({ params: { slug } }: { params: { slug: string } }): Promise<Metadata> => {

@@ -1,9 +1,9 @@
 'use client';
 
-import { marginsBottom } from '../structs';
-import { ReactNode, useEffect, useState } from 'react';
-import { CardData, VerticalCard } from './VerticalCard';
+import { type ReactNode, useEffect, useState } from 'react';
+import type { marginsBottom } from '../structs';
 import { HorizontalCard } from './HorizontalCard';
+import { type CardData, VerticalCard } from './VerticalCard';
 
 type BlocCardArticle = {
   id: number;
@@ -74,7 +74,8 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
             disabled={cursor === 1 ? true : undefined}
             onClick={() => {
               setCursor(cursor > 1 ? cursor - 1 : cursor);
-            }}>
+            }}
+          >
             Précédent
           </button>
         </li>
@@ -89,7 +90,8 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
               className='fr-pagination__link'
               href='#'
               aria-current={cursor === i ? true : undefined}
-              onClick={() => setCursor(i)}>
+              onClick={() => setCursor(i)}
+            >
               {i}
             </a>
           </li>
@@ -104,7 +106,8 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
                 className='fr-pagination__link'
                 href='#'
                 aria-current={cursor === i ? true : undefined}
-                onClick={() => setCursor(i)}>
+                onClick={() => setCursor(i)}
+              >
                 {i}
               </a>
             </li>
@@ -126,7 +129,8 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
                 className='fr-pagination__link'
                 href='#'
                 aria-current={cursor === i ? true : undefined}
-                onClick={() => setCursor(i)}>
+                onClick={() => setCursor(i)}
+              >
                 {i}
               </a>
             </li>
@@ -156,7 +160,8 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
                 className='fr-pagination__link fr-displayed-lg'
                 href='#'
                 onClick={() => setCursor(i)}
-                aria-current={cursor === i ? true : undefined}>
+                aria-current={cursor === i ? true : undefined}
+              >
                 {i}
               </a>
             </li>
@@ -173,7 +178,8 @@ export const BlocCards = ({ articles, type }: BlocCardsProps) => {
             disabled={cursor === subArticles.length ? true : undefined}
             onClick={() => {
               setCursor(cursor < subArticles.length ? cursor + 1 : cursor);
-            }}>
+            }}
+          >
             Suivant
           </button>
         </li>

@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 const GenericError = ({
   title,
@@ -35,7 +35,8 @@ const GenericError = ({
             aria-hidden='true'
             width='160'
             height='200'
-            viewBox='0 0 160 200'>
+            viewBox='0 0 160 200'
+          >
             <use className='fr-artwork-motif' href='/dsfr/artwork/background/ovoid.svg' />
             <use className='fr-artwork-background' href='/dsfr/artwork/background/ovoid.svg#artwork-background' />
             <g transform='translate(40, 60)'>
@@ -57,7 +58,8 @@ const NotFound = () => (
   <GenericError
     title='Page non trouvée'
     subtitle='Erreur 404'
-    lead='La page que vous cherchez est introuvable. Excusez-nous pour la gène occasionnée.'>
+    lead='La page que vous cherchez est introuvable. Excusez-nous pour la gène occasionnée.'
+  >
     Si vous avez tapé l&apos;adresse web dans le navigateur, vérifiez qu&apos;elle est correcte. La page n’est peut-être plus
     disponible.
     <br />

@@ -1,9 +1,9 @@
-import { MetadataRoute } from 'next';
-import { urlFromEnv } from '@/utils';
-import { getPageAccueil, pageNameOf } from '@/api/page-accueil';
-import { getPages } from '@/api/pages';
+import type { MetadataRoute } from 'next';
 import { getBreves } from '@/api/breves';
 import { getEtudes } from '@/api/etudes';
+import { getPageAccueil, pageNameOf } from '@/api/page-accueil';
+import { getPages } from '@/api/pages';
+import { urlFromEnv } from '@/utils';
 
 export const dynamic = 'force-dynamic';
 
