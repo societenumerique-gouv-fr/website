@@ -13,30 +13,30 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^1.29.0",
-    "@gouvfr/dsfr": "^1.14.2",
-    "axios": "^1.13.2",
+    "@codegouvfr/react-dsfr": "^1.31.0",
+    "@gouvfr/dsfr": "^1.14.3",
+    "axios": "^1.13.3",
     "dotenv": "^17.2.3",
-    "next": "16.0.10",
-    "react": "^19.2.3",
+    "next": "16.1.6",
+    "react": "^19.2.4",
     "react-dom": "^19.2.3",
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.8",
-    "@commitlint/cli": "^20.2.0",
-    "@commitlint/config-conventional": "^20.2.0",
-    "@testing-library/react": "^16.3.0",
-    "@types/node": "^24.10.2",
-    "@types/react": "^19.2.7",
+    "@biomejs/biome": "2.3.12",
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
     "husky": "^9.1.7",
-    "jsdom": "^27.3.0",
+    "jsdom": "^27.4.0",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
-    "sass": "^1.95.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.97.3",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.18"
   }
 }

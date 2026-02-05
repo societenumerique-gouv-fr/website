@@ -5,7 +5,8 @@ import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
-export const generateMetadata = async ({ params: { slug } }: { params: { slug: string } }): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+  const { slug } = await params;
   const etude = toSingleEtude(await getEtudesMatchingSlug(`nos-ressources/etudes/${slug}`));
 
   return {
@@ -13,7 +14,8 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
   };
 };
 
-const EtudesPage = async ({ params: { slug } }: { params: { slug: string } }) => {
+const EtudesPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
   const etude = toSingleEtude(await getEtudesMatchingSlug(`nos-ressources/etudes/${slug}`));
 
   if (etude == null) return <NotFound />;
