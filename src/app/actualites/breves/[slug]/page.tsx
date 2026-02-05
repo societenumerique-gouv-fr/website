@@ -5,7 +5,8 @@ import SkipLinksPortal from '@/app/_components/SkipLinksPortal';
 import NotFound from '@/app/not-found';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
-export const generateMetadata = async ({ params: { slug } }: { params: { slug: string } }): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+  const { slug } = await params;
   const breve = toSingleBreve(await getBrevesMatchingSlug(`actualites/breves/${slug}`));
 
   return {
@@ -13,7 +14,8 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
   };
 };
 
-const BrevePage = async ({ params: { slug } }: { params: { slug: string } }) => {
+const BrevePage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
   const breve = toSingleBreve(await getBrevesMatchingSlug(`actualites/breves/${slug}`));
 
   if (breve == null) return <NotFound />;

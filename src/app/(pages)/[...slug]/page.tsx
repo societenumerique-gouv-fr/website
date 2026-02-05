@@ -10,7 +10,7 @@ import { byPubicationDate } from '@/ressources/collection-operations';
 import { contentId, defaultSkipLinks } from '@/utils/skipLinks';
 
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> => {
-  const slug = (await params).slug;
+  const { slug } = await params;
   const page = toSinglePage(await getPagesMatchingSlug(slug));
 
   return {
@@ -19,7 +19,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 };
 
 const Page = async ({ params }: { params: Promise<{ slug: string[] }> }) => {
-  const slug = (await params).slug;
+  const { slug } = await params;
 
   const navigationItems: { data: NavbarNavigationItems } = await getNavigationItems();
   const page = toSinglePage(await getPagesMatchingSlug(slug));
