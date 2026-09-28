@@ -1,0 +1,6 @@
+server {
+  listen ${PORT};
+  server_name _;
+
+  return 301 https://anct.gouv.fr/programmes-dispositifs/societe-numerique;
+}
