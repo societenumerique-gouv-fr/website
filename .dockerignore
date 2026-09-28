@@ -1,14 +1,2 @@
-.tmp/
-.cache/
-.git/
-.env
-.next
-!.next/static
-!.next/standalone
-build/
-backup/
-Dockerfile
-.dockerignore
-node_modules
-npm-debug.log
-README.md
+*
+!default.conf.template
